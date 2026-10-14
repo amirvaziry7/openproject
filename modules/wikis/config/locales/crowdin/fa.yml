@@ -12,7 +12,7 @@ fa:
         authentication_method: روش احراز هویت
         authentication_methods:
           oauth2_sso: ورود یکپارچه از طریق ارائه‌دهنده هویت OpenID Connect
-          two_way_oauth2: جریان Authorization Code در OAuth 2.0 دوطرفه
+          two_way_oauth2: "جریان مجوزدهی Code در OAuth 2.0 دوطرفه"
         token_exchange_scope: Scope در XWiki
         url: URL نمونه
         wiki_audience: Audience در XWiki
@@ -118,7 +118,7 @@ fa:
         oauth:
           openproject_oauth: OAuth اوپن‌پروجکت
           redirect_uri: URI تغییرمسیر
-          redirect_uri_caption: این مقدار را در فیلد Redirect URI ثبت کلاینت OIDC در XWiki کپی کنید.
+          redirect_uri_caption: "این مقدار را در فیلد تغییر مسیر URI ثبت کلاینت OIDC در XWiki کپی کنید."
         sections:
           general_information: اطلاعات عمومی
           oauth_configuration: پیکربندی OAuth
@@ -137,9 +137,9 @@ fa:
       done_continue: انجام شد، ادامه
       open_wiki: بازکردن ویکی
       save_and_continue: ذخیره و ادامه
-      wiki_page: صفحه Wiki
+      wiki_page: "صفحه ویکی"
     create_new_wiki_page_dialog:
-      title: ایجاد صفحه Wiki جدید
+      title: "ایجاد صفحه ویکی جدید"
     deferred_inline_page_link_macro_component:
       loading: در حال بارگذاری…
     delete_relation_page_link_confirmation_dialog:
@@ -171,7 +171,7 @@ fa:
         xwiki_oauth_unauthorized: توکن کاربر توسط XWiki شناسایی نشد.
     index:
       column_last_edited: آخرین ویرایش
-      column_name: صفحه Wiki
+      column_name: "صفحه ویکی"
       column_parent: والد
       column_project: پروژه
       column_sub_pages: زیرصفحه‌ها
@@ -188,11 +188,11 @@ fa:
         other: "%{count} زیرصفحه"
     inline_wiki_page_dialog:
       title_add: افزودن صفحهٔ ویکی موجود
-      title_create: ایجاد صفحه Wiki جدید
+      title_create: "ایجاد صفحه ویکی جدید"
     instructions:
       xwiki:
         integration: مدیریت XWiki
-        oauth_application_details_html: پس از بستن این پنجره دیگر مقدار رمز کلاینت در دسترس نخواهد بود. این مقادیر را در [تنظیمات XWiki OpenProject Integration](xwiki_admin_link) کپی کنید.
+        oauth_application_details_html: "پس از بستن این پنجره دیگر مقدار رمز کلاینت در دسترس نخواهد بود. این مقادیر را در [تنظیمات XWiki OpenProject یکپارچه‌سازی](xwiki_admin_link) کپی کنید."
     link_existing_wiki_page_dialog:
       title: افزودن صفحهٔ ویکی موجود
     oauth_login_component:
@@ -206,7 +206,7 @@ fa:
       labels:
         page_title: عنوان
         parent: والد
-        wiki_page: صفحه Wiki
+        wiki_page: "صفحه ویکی"
       search:
         no_results: هیچ صفحهٔ ویکی‌ای پیدا نشد
         placeholder: جست‌وجوی صفحهٔ ویکی (یا واردکردن URL آن)

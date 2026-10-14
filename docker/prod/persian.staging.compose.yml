@@ -1,0 +1,97 @@
+name: openproject-fa-staging
+
+x-app: &app
+  image: "${OPENPROJECT_FA_IMAGE:?Set OPENPROJECT_FA_IMAGE}"
+  environment: &app-environment
+    RAILS_ENV: production
+    DATABASE_URL: "postgres://openproject_fa_stage:${OPENPROJECT_FA_STAGE_DB_PASSWORD:?Set a staging database password}@db/openproject_fa_stage?pool=20"
+    SECRET_KEY_BASE: "${OPENPROJECT_FA_STAGE_SECRET_KEY_BASE:?Set a staging secret key}"
+    OPENPROJECT_HOST__NAME: "localhost:18080"
+    OPENPROJECT_HTTPS: "false"
+    OPENPROJECT_HSTS: "false"
+    OPENPROJECT_DEFAULT__LANGUAGE: "fa"
+    OPENPROJECT_SEED__ADMIN__USER__PASSWORD: "${OPENPROJECT_FA_STAGE_ADMIN_PASSWORD:?Set a staging admin password}"
+    OPENPROJECT_SEED__ADMIN__USER__PASSWORD__RESET: "false"
+    OPENPROJECT_CACHE__MEMCACHE__SERVER: "cache:11211"
+    OPENPROJECT_RAILS__CACHE__STORE: memcache
+    OPENPROJECT_COLLABORATIVE__EDITING__HOCUSPOCUS__URL: ""
+    IMAP_ENABLED: "false"
+    MIGRATE: "false"
+    OPENPROJECT_WEB_WORKERS: "1"
+  volumes:
+    - opdata:/var/openproject/assets
+  networks:
+    - staging
+  depends_on:
+    db:
+      condition: service_healthy
+    cache:
+      condition: service_started
+
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: openproject_fa_stage
+      POSTGRES_USER: openproject_fa_stage
+      POSTGRES_PASSWORD: "${OPENPROJECT_FA_STAGE_DB_PASSWORD:?Set a staging database password}"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - staging
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U openproject_fa_stage -d openproject_fa_stage"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+  cache:
+    image: memcached:1.6-alpine
+    networks:
+      - staging
+  seeder:
+    <<: *app
+    command: ["./docker/prod/seeder"]
+  web:
+    <<: *app
+    command: ["./docker/prod/web"]
+    networks:
+      - staging
+      - browser
+    ports:
+      - "127.0.0.1:18080:8080"
+    healthcheck:
+      test: [CMD, curl, --fail, "http://localhost:8080/health_checks/default"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 120s
+  worker:
+    <<: *app
+    command: ["./docker/prod/worker"]
+  rails-tests:
+    image: openproject-fa-rails-tests:18.0.0-d0d7ca836aa5
+    profiles: [validation]
+    environment:
+      RAILS_ENV: test
+      DISABLE_SPRING: "1"
+      DATABASE_URL: "postgres://openproject_fa_stage:${OPENPROJECT_FA_STAGE_DB_PASSWORD:?Set a staging database password}@db/openproject_fa_test?pool=20"
+      SECRET_KEY_BASE: "${OPENPROJECT_FA_STAGE_SECRET_KEY_BASE:?Set a staging secret key}"
+    volumes:
+      - ../../script/i18n/check_persian:/app/script/i18n/check_persian:ro
+      - ../../spec/features/localization_spec.rb:/app/spec/features/localization_spec.rb:ro
+      - ../../app/views/layouts/base.html.erb:/app/app/views/layouts/base.html.erb:ro
+      - ../../frontend/src/app/shared/components/resizer/resizer/main-menu-resizer.component.spec.ts:/app/frontend/src/app/shared/components/resizer/resizer/main-menu-resizer.component.spec.ts
+    networks:
+      - staging
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:
+  opdata:
+
+networks:
+  staging:
+    internal: true
+  browser:

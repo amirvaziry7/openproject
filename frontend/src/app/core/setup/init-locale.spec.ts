@@ -68,4 +68,37 @@ describe('initializeLocale', () => {
     expect(moment('2021-01-01').format('ww')).toBe('01');
     expect(moment('2021-01-04').format('ww')).toBe('02');
   });
+
+  it('loads Persian translations and preserves numeric date formatting', async () => {
+    setInitializer('fa');
+
+    await initializeLocale(() => Promise.resolve({
+      default: { fa: { js: { label_project_plural: 'پروژه‌ها' } } },
+    }));
+
+    expect(window.I18n.locale).toBe('fa');
+    expect(window.I18n.t('js.label_project_plural')).toBe('پروژه‌ها');
+    expect(moment('2026-10-14').format('YYYY-MM-DD')).toBe('2026-10-14');
+  });
+
+  it('keeps English active when the instance language is Persian', async () => {
+    setInitializer('en');
+    const meta = document.querySelector<HTMLMetaElement>('meta[name="openproject_initializer"]');
+    meta!.dataset.instancelocale = 'fa';
+    const loadedLocales:string[] = [];
+
+    await initializeLocale((locale:string) => {
+      loadedLocales.push(locale);
+      return Promise.resolve({
+        default: {
+          en: { js: { label_project_plural: 'Projects' } },
+          fa: { js: { label_project_plural: 'پروژه‌ها' } },
+        },
+      });
+    });
+
+    expect(loadedLocales).toEqual(['en', 'fa']);
+    expect(window.I18n.locale).toBe('en');
+    expect(window.I18n.t('js.label_project_plural')).toBe('Projects');
+  });
 });

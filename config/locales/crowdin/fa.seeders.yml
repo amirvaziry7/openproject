@@ -320,7 +320,7 @@ fa:
             item_0:
               subject: صفحهٔ ورود جدید
             item_1:
-              subject: بازنشانی گذرواژه ایمیل ارسال نمی‌کند
+              subject: "بازنشانی رمز عبور ایمیل ارسال نمی‌کند"
             item_2:
               subject: وب‌سایت جدید
               children:
@@ -486,19 +486,4 @@ fa:
               group_name: وظایف
       welcome:
         title: به OpenProject خوش آمدید!
-        text: |
-          OpenProject یکی از نرم‌افزارهای پیشرو متن‌باز برای مدیریت پروژه است. مدیریت پروژهٔ کلاسیک، Agile و Hybrid را پشتیبانی می‌کند و کنترل کامل داده‌ها را در اختیار شما می‌گذارد.
-
-          قابلیت‌ها و کاربردهای اصلی:
-
-          * [مدیریت سبد پروژه](https://www.openproject.org/collaboration-software-features/project-portfolio-management/)
-          * [برنامه‌ریزی و زمان‌بندی پروژه](https://www.openproject.org/collaboration-software-features/project-planning-scheduling/)
-          * [مدیریت وظایف و پیگیری Issue](https://www.openproject.org/collaboration-software-features/task-management/)
-          * [بردهای Agile (Scrum و Kanban)](https://www.openproject.org/collaboration-software-features/agile-project-management/)
-          * [مدیریت نیازمندی‌ها و برنامه‌ریزی انتشار](https://www.openproject.org/collaboration-software-features/product-development/)
-          * [ثبت زمان و هزینه، بودجه‌ها](https://www.openproject.org/collaboration-software-features/time-tracking/)
-          * [همکاری تیمی و مستندسازی](https://www.openproject.org/collaboration-software-features/team-collaboration/)
-
-          به آیندهٔ مدیریت پروژه خوش آمدید.
-
-          برای مدیران: می‌توانید این متن خوش‌آمدگویی را [اینجا]({{opSetting:base_url}}/admin/settings/general) تغییر دهید.
+        text: "OpenProject یکی از نرم‌افزارهای پیشرو متن‌باز برای مدیریت پروژه است. مدیریت پروژهٔ کلاسیک، Agile و Hybrid را پشتیبانی می‌کند و کنترل کامل داده‌ها را در اختیار شما می‌گذارد.\n\nقابلیت‌ها و کاربردهای اصلی:\n\n* [مدیریت سبد پروژه](https://www.openproject.org/collaboration-software-features/project-portfolio-management/)\n* [برنامه‌ریزی و زمان‌بندی پروژه](https://www.openproject.org/collaboration-software-features/project-planning-scheduling/)\n* [مدیریت وظایف و پیگیری مسئله](https://www.openproject.org/collaboration-software-features/task-management/)\n* [بردهای Agile (Scrum و کانبان)](https://www.openproject.org/collaboration-software-features/agile-project-management/)\n* [مدیریت نیازمندی‌ها و برنامه‌ریزی انتشار](https://www.openproject.org/collaboration-software-features/product-development/)\n* [ثبت زمان و هزینه، بودجه‌ها](https://www.openproject.org/collaboration-software-features/time-tracking/)\n* [همکاری تیمی و مستندسازی](https://www.openproject.org/collaboration-software-features/team-collaboration/)\n\nبه آیندهٔ مدیریت پروژه خوش آمدید.\n\nبرای مدیران: می‌توانید این متن خوش‌آمدگویی را [اینجا]({{opSetting:base_url}}/admin/settings/general) تغییر دهید.\n"

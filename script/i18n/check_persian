@@ -1,0 +1,180 @@
+# frozen_string_literal: true
+
+#-- copyright
+# OpenProject is an open source project management software.
+# Copyright (C) the OpenProject GmbH
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License version 3.
+#
+# OpenProject is a fork of ChiliProject, which is a fork of Redmine. The copyright follows:
+# Copyright (C) 2006-2013 Jean-Philippe Lang
+# Copyright (C) 2010-2013 the ChiliProject Team
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+#
+# See COPYRIGHT and LICENSE files for more details.
+#++
+
+require "yaml"
+require "date"
+
+class PersianLocaleAudit
+  TECHNICAL_VALUES = %w[
+    Jira rtl ltr CSV PDF XLS Atom UTF-8 ISO-8859-1 true false ImageMagick AngularJS API RSS
+    iCalendar SCM LDAPS STARTTLS Anthropic DeepSeek GPUStack Mistral Ollama OpenAI OpenRouter
+    Perplexity xAI OAuth Markdown BCF BIM BCF-XML GitHub GitLab DN Google reCAPTCHA HCaptcha
+    Nextcloud OneDrive SharePoint URI WebAuthn XWiki OpenProject
+  ].push("Azure OpenAI", "AWS Bedrock", "Google Gemini", "Google Vertex AI", "Microsoft Entra",
+         "OpenProject OpenID Connect", "Cloudflare Turnstile™", "reCAPTCHA v2", "reCAPTCHA v3",
+         "Amazon SNS", "«Integration OpenProject»").freeze
+
+  def initialize(root)
+    @root = root
+    @errors = []
+    @leaves = 0
+    @technical = 0
+  end
+
+  def call
+    Dir.chdir(@root) do
+      persian_paths.each { |path| load_locale(path, "fa") }
+      source_paths.each { |path| check_pair(path) }
+    end
+
+    puts "Checked #{@leaves} source leaves; #{@technical} English technical values retained."
+    @errors.each { |error| warn error }
+    puts "#{@errors.length} errors."
+    @errors.empty?
+  end
+
+  private
+
+  def persian_paths
+    Dir.glob("{config/locales,modules/*/config/locales}/crowdin/{fa,js-fa,fa.seeders}.yml")
+  end
+
+  def source_paths
+    Dir.glob("{config/locales,modules/*/config/locales}/{en,js-en,en.seeders}.yml")
+  end
+
+  def load_locale(path, locale)
+    text = File.read(path, encoding: "UTF-8")
+    check_duplicate_keys(Psych.parse(text), path)
+    data = YAML.safe_load(text, permitted_classes: [Symbol, Date, Time], aliases: true)
+    values = data.fetch(locale)
+    if locale == "fa"
+      flatten(values).each do |key, value|
+        next unless value.is_a?(String)
+
+        @errors << "#{path}: corrupted text at #{key}" if value.match?(/\?{3,}|\uFFFD/)
+        @errors << "#{path}: Arabic kaf or yeh at #{key}" if value.match?(/[\u0643\u064A]/)
+      end
+    end
+    values
+  rescue Psych::Exception, KeyError => e
+    @errors << "#{path}: #{e.message}"
+    {}
+  end
+
+  def check_duplicate_keys(node, path)
+    return unless node
+
+    if node.is_a?(Psych::Nodes::Mapping)
+      keys = node.children.each_slice(2).map { |key, _| key.value }
+      keys.tally.each do |key, count|
+        @errors << "#{path}: duplicate key #{key}" if count > 1
+      end
+    end
+
+    node.children&.each { |child| check_duplicate_keys(child, path) }
+  end
+
+  def flatten(value, prefix = [])
+    case value
+    when Hash
+      value.each_with_object({}) { |(key, child), result| result.merge!(flatten(child, prefix + [key.to_s])) }
+    when Array
+      value.each_with_index.to_h { |child, index| [index.to_s, child] }
+           .then { |items| flatten(items, prefix) }
+    else
+      { prefix.join(".") => value }
+    end
+  end
+
+  def check_pair(source)
+    filename = File.basename(source).sub("en", "fa")
+    target = File.join(File.dirname(source), "crowdin", filename)
+    unless File.exist?(target)
+      @errors << "#{source}: no Persian counterpart"
+      return
+    end
+
+    english = flatten(load_locale(source, "en"))
+    persian = flatten(load_locale(target, "fa"))
+    @leaves += english.length
+    check_leaves(target, english, persian)
+  end
+
+  def check_leaves(target, english, persian)
+    english.each do |key, value|
+      if !persian.key?(key)
+        @errors << "#{target}: missing #{key}"
+      elsif value.is_a?(String)
+        check_string(target, key, value, persian[key])
+      end
+    end
+  end
+
+  def check_string(path, key, english, persian)
+    unless persian.is_a?(String)
+      @errors << "#{path}: #{key} must be a string"
+      return
+    end
+
+    check_interpolations(path, key, english, persian)
+    check_markup(path, key, english, persian)
+    check_english_text(path, key, persian)
+  end
+
+  def check_interpolations(path, key, english, persian)
+    if english.scan(/%\{[^}]+\}/).uniq.sort != persian.scan(/%\{[^}]+\}/).uniq.sort
+      @errors << "#{path}: interpolation mismatch at #{key}"
+    end
+  end
+
+  def check_markup(path, key, english, persian)
+    @errors << "#{path}: markup mismatch at #{key}" if markup_tokens(english) != markup_tokens(persian)
+  end
+
+  def check_english_text(path, key, persian)
+    visible = persian.gsub(/%\{[^}]+\}|<[^>]+>|https?:\/\/\S+/, "")
+    return unless visible.match?(/[A-Za-z]{2}/) && !visible.match?(/[\u0600-\u06FF]/)
+    return if key.start_with?("date.order.")
+
+    if TECHNICAL_VALUES.include?(persian)
+      @technical += 1
+    else
+      @errors << "#{path}: untranslated text at #{key}: #{persian}"
+    end
+  end
+
+  def markup_tokens(value)
+    value.scan(%r!</?[A-Za-z][^>]*>|(?<=\]\()[^)]*(?=\))|\{\{[^}]+\}\}|`[^`]*`!).sort
+  end
+end
+
+if $PROGRAM_NAME == __FILE__
+  exit(PersianLocaleAudit.new(File.expand_path("../..", __dir__)).call ? 0 : 1)
+end

@@ -42,7 +42,7 @@ RSpec.describe "Localization", with_settings: { login_required?: false,
       visit projects_path
 
       expect(page)
-        .to have_content("Projekte")
+        .to have_text("Projekte")
     end
   end
 
@@ -54,7 +54,46 @@ RSpec.describe "Localization", with_settings: { login_required?: false,
     it "uses the default language configured in administration" do
       visit projects_path
 
-      expect(page).to have_content("Projects")
+      expect(page).to have_text("Projects")
+    end
+  end
+
+  context "with Persian as the instance language",
+          with_settings: { available_languages: %w[en fa], default_language: "fa" } do
+    before do
+      Capybara.current_session.driver.header("Accept-Language", "zz")
+    end
+
+    it "renders the project page in Persian with right-to-left direction" do
+      visit projects_path
+
+      expect(page).to have_text("پروژه‌ها")
+      expect(page).to have_css('html[lang="fa"][dir="rtl"]', visible: :all)
+    end
+
+    it "renders the login page with right-to-left direction" do
+      visit signin_path
+
+      expect(page).to have_css('html[lang="fa"][dir="rtl"]', visible: :all)
+    end
+
+    it "preserves an explicit English user preference" do
+      user = create(:user, language: "en")
+      login_as(user)
+
+      visit projects_path
+
+      expect(page).to have_text("Projects")
+      expect(page).to have_css('html[lang="en"][dir="ltr"]', visible: :all)
+      expect(user.reload.language).to eq("en")
+    end
+
+    it "respects a supported browser language" do
+      Capybara.current_session.driver.header("Accept-Language", "en")
+
+      visit projects_path
+
+      expect(page).to have_css('html[lang="en"][dir="ltr"]', visible: :all)
     end
   end
 end

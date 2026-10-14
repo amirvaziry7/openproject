@@ -20,7 +20,7 @@ fa:
   label_avatar_plural: آواتارها
   label_choose_avatar: انتخاب آواتار از فایل
   label_current_avatar: آواتار فعلی
-  message_avatar_uploaded: آواتار مورد نظر با موفقيت تغيير كرد
+  message_avatar_uploaded: "آواتار مورد نظر با موفقیت تغییر کرد"
   plugin_openproject_avatars:
     description: این پلاگین به کاربران OpenProject اجازه می‌دهد تا تصویری را بارگذاری کنند که به عنوان یک آواتار یا از تصاویر ثبت‌شده از Gravatar استفاده شود.
     name: آواتارها

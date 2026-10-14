@@ -25,7 +25,7 @@ fa:
     errors:
       models:
         cost_report:
-          pivot_axes_do_not_match_group_bys: The rows and columns must together cover exactly the grouping criteria of the query.
+          pivot_axes_do_not_match_group_bys: "سطرها و ستون‌ها باید با هم دقیقاً معیارهای گروه‌بندی پرس‌وجو را پوشش دهند."
     models:
       cost_query:
         one: گزارش هزینه

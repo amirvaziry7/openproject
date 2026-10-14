@@ -38,23 +38,23 @@ fa:
   button_continue: ادامه
   button_make_active: فعال‌کردن
   button_make_default: تنظیم به‌عنوان پیش‌فرض
-  button_otp_by_sms: SMS
+  button_otp_by_sms: "پیامک"
   button_otp_by_voice: تماس صوتی
   button_resend_otp_form: ارسال مجدد
-  field_otp: گذرواژه یک‌بارمصرف
+  field_otp: "رمز عبور یک‌بارمصرف"
   label_confirmed: تأییدشده
   label_otp_channel: کانال تحویل
   notice_account_has_no_phone: هیچ شماره تلفن همراهی به حساب شما مرتبط نیست.
-  notice_account_otp_expired: گذرواژه یک‌بارمصرف واردشده منقضی شده است.
-  notice_account_otp_invalid: گذرواژه یک‌بارمصرف نامعتبر است.
-  notice_account_otp_send_failed: گذرواژه یک‌بارمصرف شما ارسال نشد.
-  notice_developer_strategy_otp: 'راهبرد توسعه‌دهنده گذرواژه یک‌بارمصرف زیر را تولید کرد: %{token} (کانال: %{channel})'
+  notice_account_otp_expired: "رمز عبور یک‌بارمصرف واردشده منقضی شده است."
+  notice_account_otp_invalid: "رمز عبور یک‌بارمصرف نامعتبر است."
+  notice_account_otp_send_failed: "رمز عبور یک‌بارمصرف شما ارسال نشد."
+  notice_developer_strategy_otp: "راهبرد توسعه‌دهنده رمز عبور یک‌بارمصرف زیر را تولید کرد: %{token} (کانال: %{channel})"
   notice_phone_number_format: لطفاً شماره را با قالب +XX XXXXXXXX وارد کنید.
   plugin_openproject_two_factor_authentication:
-    description: این افزونهٔ OpenProject کاربران را با احراز هویت دومرحله‌ای از طریق گذرواژهٔ یک‌بارمصرف مبتنی بر استاندارد TOTP (مانند Google Authenticator) یا کد ارسال‌شده به تلفن همراه از طریق SMS یا تماس صوتی احراز هویت می‌کند.
+    description: "این افزونهٔ OpenProject کاربران را با احراز هویت دومرحله‌ای از طریق رمز عبورٔ یک‌بارمصرف مبتنی بر استاندارد TOTP (مانند Google Authenticator) یا کد ارسال‌شده به تلفن همراه از طریق SMS یا تماس صوتی احراز هویت می‌کند."
     name: احراز هویت دومرحله‌ای OpenProject
   text_otp_not_receive: روش‌های تأیید دیگر
-  text_send_otp_again: 'ارسال مجدد گذرواژه یک‌بارمصرف از طریق:'
+  text_send_otp_again: "ارسال مجدد رمز عبور یک‌بارمصرف از طریق:"
   two_factor_authentication:
     admin:
       all_devices_deleted: همه دستگاه‌های 2FA این کاربر حذف شدند
@@ -69,8 +69,8 @@ fa:
       text_2fa_enabled: در هر ورود، از این کاربر خواسته می‌شود توکن OTP دستگاه پیش‌فرض 2FA خود را وارد کند.
     backup_codes:
       generate:
-        keep_safe_as_password: مهم! با این کدها مانند گذرواژه رفتار کنید.
-        keep_safe_warning: آن‌ها را در مدیر گذرواژه ذخیره کنید یا این صفحه را چاپ کرده و در محل امن نگه دارید.
+        keep_safe_as_password: "مهم! با این کدها مانند رمز عبور رفتار کنید."
+        keep_safe_warning: "آن‌ها را در مدیر رمز عبور ذخیره کنید یا این صفحه را چاپ کرده و در محل امن نگه دارید."
         regenerate_warning: 'هشدار: اگر قبلاً کد پشتیبان ساخته‌اید، نامعتبر می‌شوند و دیگر کار نخواهند کرد.'
         title: تولید کدهای پشتیبان
       overview_description: |
@@ -106,8 +106,8 @@ fa:
         redacted_identifier: دستگاه همراه (%{redacted_number})
         request_2fa_identifier: "%{redacted_identifier}، یک کد احراز هویت از طریق %{delivery_channel} برای شما ارسال کردیم"
         title: دستگاه همراه
-      text_confirm_to_change_default_html: لطفاً با واردکردن گذرواژه یک‌بارمصرف از دستگاه پیش‌فرض فعلی، تغییر دستگاه پیش‌فرض به <strong>%{new_identifier}</strong> را تأیید کنید.
-      text_confirm_to_complete_html: لطفاً با واردکردن گذرواژه یک‌بارمصرف از دستگاه پیش‌فرض، ثبت دستگاه <strong>%{identifier}</strong> را تکمیل کنید.
+      text_confirm_to_change_default_html: "لطفاً با واردکردن رمز عبور یک‌بارمصرف از دستگاه پیش‌فرض فعلی، تغییر دستگاه پیش‌فرض به <strong>%{new_identifier}</strong> را تأیید کنید."
+      text_confirm_to_complete_html: "لطفاً با واردکردن رمز عبور یک‌بارمصرف از دستگاه پیش‌فرض، ثبت دستگاه <strong>%{identifier}</strong> را تکمیل کنید."
       text_identifier: می‌توانید با این فیلد یک شناسه دلخواه برای دستگاه تعیین کنید.
       totp:
         account: نام حساب / صادرکننده
@@ -152,18 +152,16 @@ fa:
     message_bird:
       sms_delivery_failed: ارسال SMS توسط MessageBird ناموفق بود.
       voice_delivery_failed: تماس صوتی MessageBird ناموفق بود.
-    mobile_transmit_notification: یک گذرواژه یک‌بارمصرف به تلفن همراه شما ارسال شد.
+    mobile_transmit_notification: "یک رمز عبور یک‌بارمصرف به تلفن همراه شما ارسال شد."
     no_valid_phone_number: شماره تلفن معتبری وجود ندارد.
     notice_not_writable: تنظیمات 2FA از طریق متغیرهای محیطی ارائه شده‌اند و قابل بازنویسی نیستند.
     remember:
-      active_session_notice: 'حساب شما یک Cookie یادآوری فعال تا %{expires_on} دارد. این Cookie به شما اجازه می‌دهد تا آن زمان بدون عامل دوم وارد حساب شوید.
-
-        '
+      active_session_notice: "حساب شما یک کوکی یادآوری فعال تا %{expires_on} دارد. این کوکی به شما اجازه می‌دهد تا آن زمان بدون عامل دوم وارد حساب شوید.\n"
       clear_cookie: حذف همه Sessionهای 2FA به‌یادمانده.
       cookie_removed: همه Sessionهای 2FA به‌یادمانده حذف شدند.
-      dont_ask_again: ایجاد Cookie برای به‌یادسپاری احراز هویت 2FA روی این کلاینت به‌مدت %{days} روز.
+      dont_ask_again: "ایجاد کوکی برای به‌یادسپاری احراز هویت 2FA روی این کلاینت به‌مدت %{days} روز."
       label: به‌خاطر سپردن
-      other_active_session_notice: حساب شما در Session دیگری Cookie یادآوری فعال دارد.
+      other_active_session_notice: "حساب شما در نشست دیگری کوکی یادآوری فعال دارد."
     settings:
       current_configuration: پیکربندی فعلی
       failed_to_save_settings: 'به‌روزرسانی تنظیمات 2FA ناموفق بود: %{message}'
@@ -188,5 +186,5 @@ fa:
       webauthn: WebAuthn
     text_2fa_disabled: برای فعال‌کردن احراز هویت دومرحله‌ای، با دکمه زیر یک دستگاه 2FA جدید ثبت کنید. اگر از قبل دستگاهی دارید، باید آن را به‌عنوان پیش‌فرض تنظیم کنید.
     text_2fa_enabled: در هر ورود، از شما خواسته می‌شود توکن OTP دستگاه پیش‌فرض 2FA خود را وارد کنید.
-    text_otp_delivery_message_sms: گذرواژه یک‌بارمصرف %{app_title} شما %{token} است
-    text_otp_delivery_message_voice: 'گذرواژه یک‌بارمصرف %{app_title} شما این است: %{pause} %{token}. %{pause} تکرار می‌کنم: %{pause} %{token}'
+    text_otp_delivery_message_sms: "رمز عبور یک‌بارمصرف %{app_title} شما %{token} است"
+    text_otp_delivery_message_voice: "رمز عبور یک‌بارمصرف %{app_title} شما این است: %{pause} %{token}. %{pause} تکرار می‌کنم: %{pause} %{token}"

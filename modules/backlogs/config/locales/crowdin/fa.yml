@@ -45,10 +45,10 @@ fa:
       work_package:
         backlog_bucket: مخزن بک‌لاگ
         backlog_inbox: صندوق بک‌لاگ
-        backlogs_work_package_type: Backlog type
-        position: Position
+        backlogs_work_package_type: "نوع کارهای معوق"
+        position: "جایگاه"
         sprint: اسپرینت
-        story_points: Story Points
+        story_points: "امتیاز داستان"
     errors:
       messages:
         cannot_start_while_receiving_shared_sprints: تا زمانی که پروژه اسپرینت‌های اشتراکی دریافت می‌کند، قابل شروع نیست.
@@ -84,8 +84,8 @@ fa:
             backlog_bucket:
               backlog_bucket_from_another_project: باید متعلق به همان پروژهٔ بستهٔ کاری باشد.
             blocks_ids:
-              can_only_contain_work_packages_of_current_sprint: can only contain IDs of work packages in the current sprint.
-              must_block_at_least_one_work_package: must contain the ID of at least one ticket.
+              can_only_contain_work_packages_of_current_sprint: "فقط می‌تواند شامل شناسه بسته‌های کاری اسپرینت فعلی باشد."
+              must_block_at_least_one_work_package: "باید شامل شناسه حداقل یک درخواست باشد."
             sprint:
               not_assignable: قابل تخصیص نیست، زیرا یا با پروژه به اشتراک گذاشته نشده یا قبلاً پایان یافته است.
               not_eligible_for_moving: اسپرینت موردنظر در پروژه مقصد فعال نیست.
@@ -167,7 +167,7 @@ fa:
     index_subheader_component:
       label_search_by_subject: جستجوی بسته‌های کاری بر اساس موضوع
     label_burndown_chart: نمودار Burndown
-    label_is_done_status: Status %{status_name} means done
+    label_is_done_status: "وضعیت %{status_name} به معنای انجام‌شده است"
     label_sprint_board: برد اسپرینت
     label_sprint_report: گزارش اسپرینت
     move_to_bucket_dialog_component:
@@ -179,10 +179,10 @@ fa:
     points_label:
       one: امتیاز
       other: امیتاز ها
-    positions_could_not_be_rebuilt: Positions could not be rebuilt.
-    positions_rebuilt_successfully: Positions rebuilt successfully.
-    rebuild: Rebuild
-    rebuild_positions: Rebuild positions
+    positions_could_not_be_rebuilt: "جایگاه‌ها بازسازی نشدند."
+    positions_rebuilt_successfully: "جایگاه‌ها با موفقیت بازسازی شدند."
+    rebuild: "بازسازی"
+    rebuild_positions: "بازسازی جایگاه‌ها"
     remaining_hours: کار باقی‌مانده
     sharing: اشتراک‌گذاری اسپرینت
     show_burndown_chart: نمودار Burndown
@@ -260,7 +260,7 @@ fa:
       one: "%{count} امتیاز داستان"
       other: "%{count} امتیاز های داستان"
     types_and_statuses: انواع و وضعیت‌ها
-    unassigned: Unassigned
+    unassigned: "واگذارنشده"
     user_preference:
       button_update_backlogs: به روز رسانی ماژول backlog ها
       header_backlogs: ماژول backlogها
@@ -272,7 +272,7 @@ fa:
         move_to_backlog_bucket: انتقال به سطل بک‌لاگ
         move_to_inbox: انتقال به صندوق بک‌لاگ
         move_to_sprint: انتقال به اسپرینت
-    work_package_is_closed: Work package is done, when
+    work_package_is_closed: "بسته کاری انجام‌شده محسوب می‌شود، هنگامی که"
     work_packages:
       add_existing_dialog:
         invalid_target: مقصدی که می‌خواهید مورد را به آن اضافه کنید نامعتبر است.

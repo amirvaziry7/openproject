@@ -8,7 +8,7 @@ fa:
         ldap_auth_source: اتصال LDAP
         users_count: اعضا
       ldap_departments/synchronized_tree:
-        base_dn: Base DN
+        base_dn: "DN پایه"
         guid_attribute: Attribute شناسهٔ یکتا
         ldap_auth_source: اتصال LDAP
         name: نام

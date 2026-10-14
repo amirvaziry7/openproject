@@ -14,7 +14,7 @@ fa:
         authentication_methods:
           oauth2_sso: ورود یکپارچه از طریق ارائه‌دهنده هویت OpenID Connect
           oauth2_sso_with_two_way_oauth2_fallback: ورود یکپارچه با OAuth 2.0 دوطرفه به‌عنوان روش جایگزین
-          two_way_oauth2: جریان Authorization Code در OAuth 2.0 دوطرفه
+          two_way_oauth2: "جریان مجوزدهی Code در OAuth 2.0 دوطرفه"
         storage_audience: Audience فضای ذخیره‌سازی
         token_exchange_scope: Scope فضای ذخیره‌سازی
       storages/project_storage:
@@ -36,7 +36,7 @@ fa:
         linkable_to_storage: قابل پیوند به فضای ذخیره‌سازی
         linkable_to_storage_url: قابل پیوند به URL فضای ذخیره‌سازی
         name: نام
-        password: گذرواژه برنامه
+        password: "رمز عبور برنامه"
         provider_type: نوع ارائه‌دهنده
         storage: فضای ذخیره‌سازی
         storage_url: URL فضای ذخیره‌سازی
@@ -64,8 +64,8 @@ fa:
         storages/storage:
           attributes:
             host:
-              authorization_header_missing: به‌طور کامل راه‌اندازی نشده است. نمونه Nextcloud هدر «Authorization» را دریافت نمی‌کند که برای مجوزدهی مبتنی بر Bearer Token در درخواست‌های API لازم است. پیکربندی HTTP Server را دوباره بررسی کنید.
-              cannot_be_connected_to: قابل دسترسی نبود. مطمئن شوید Host در دسترس است و برنامه OpenProject Integration نصب شده باشد.
+              authorization_header_missing: "به‌طور کامل راه‌اندازی نشده است. نمونه Nextcloud هدر «مجوزدهی» را دریافت نمی‌کند که برای مجوزدهی مبتنی بر Bearer توکن در درخواست‌های API لازم است. پیکربندی HTTP سرور را دوباره بررسی کنید."
+              cannot_be_connected_to: "قابل دسترسی نبود. مطمئن شوید Host در دسترس است و برنامه OpenProject یکپارچه‌سازی نصب شده باشد."
               minimal_nextcloud_version_not_met: حداقل الزامات نسخه را برآورده نمی‌کند (باید Nextcloud %{minimal_version} یا بالاتر باشد، اما نسخه %{detected_version} شناسایی شد)
               not_nextcloud_server: سرور Nextcloud نیست
               op_application_not_installed: به نظر می‌رسد برنامه «OpenProject integration» نصب نشده است. ابتدا آن را نصب و دوباره تلاش کنید.
@@ -355,7 +355,7 @@ fa:
           nc_team_folder_not_found: پوشهٔ تیمی پیدا نشد.
           nc_unexpected_files: 'فایل‌های غیرمنتظره‌ای در پوشهٔ تیمی مدیریت‌شده پیدا شدند. برای نمونه: %{sample}'
           nc_unlinked_project_folders: هنوز همهٔ پوشه‌های پروژه ایجاد نشده‌اند (%{actual} / %{expected}). این وضعیت می‌تواند نشان‌دهندهٔ خطا در همگام‌سازی پس‌زمینهٔ AMPF باشد.
-          nc_userless_access_denied: گذرواژهٔ برنامهٔ پیکربندی‌شده نامعتبر است.
+          nc_userless_access_denied: "رمز عبورٔ برنامهٔ پیکربندی‌شده نامعتبر است."
           not_configured: اتصال قابل اعتبارسنجی نیست. لطفاً ابتدا پیکربندی را تکمیل کنید.
           od_client_cant_delete_folder: کلاینت در حذف پوشه‌ها مشکل دارد. لطفاً مستندات راه‌اندازی فضای ذخیره‌سازی را بررسی کنید.
           od_client_write_permission_missing: به نظر می‌رسد کلاینت مجوز نوشتن لازم را ندارد. لطفاً مستندات راه‌اندازی فضای ذخیره‌سازی را بررسی کنید.
@@ -371,9 +371,9 @@ fa:
           oidc_cant_refresh_token: هنگام بررسی دسترسی شما به فضای ذخیره‌سازی خطایی رخ داد. برای اطلاعات بیشتر، گزارش‌های سرور را بررسی کنید.
           oidc_non_oidc_user: کاربر فعلی با وجود provisionشدن، توسط یک ارائه‌دهندهٔ هویت OpenID Connect (OIDC) provision نشده است. بررسی را با یک کاربر provisionشده از طریق OIDC دوباره اجرا کنید.
           oidc_non_provisioned_user: کاربر فعلی توسط یک ارائه‌دهندهٔ هویت OpenID Connect ارائه نشده است. بررسی را با کاربری که از این طریق provision شده دوباره اجرا کنید.
-          oidc_provider_cant_exchange: به نظر می‌رسد ارائه‌دهندهٔ OpenID Connect از مبادلهٔ توکن پشتیبانی نمی‌کند، اما برای فضای ذخیره‌سازی Token Exchange پیکربندی شده است.
-          oidc_token_acquisition_failed: پیکربندی OpenID Connect شما audience لازم را ارائه نمی‌کند و قابلیت Token Exchange نیز ندارد. برای اطلاعات بیشتر، مستندات ما را بررسی کنید.
-          oidc_token_exchange_failed: به نظر می‌رسد پیکربندی Token Exchange در ارائه‌دهندهٔ OpenID Connect مشکل دارد. لطفاً پیکربندی آن را بررسی کرده و دوباره تلاش کنید.
+          oidc_provider_cant_exchange: "به نظر می‌رسد ارائه‌دهندهٔ OpenID Connect از مبادلهٔ توکن پشتیبانی نمی‌کند، اما برای فضای ذخیره‌سازی توکن Exchange پیکربندی شده است."
+          oidc_token_acquisition_failed: "پیکربندی OpenID Connect شما audience لازم را ارائه نمی‌کند و قابلیت توکن Exchange نیز ندارد. برای اطلاعات بیشتر، مستندات ما را بررسی کنید."
+          oidc_token_exchange_failed: "به نظر می‌رسد پیکربندی توکن Exchange در ارائه‌دهندهٔ OpenID Connect مشکل دارد. لطفاً پیکربندی آن را بررسی کرده و دوباره تلاش کنید."
           oidc_token_refresh_failed: هنگام بررسی دسترسی شما به فضای ذخیره‌سازی خطایی رخ داد. برای اطلاعات بیشتر، گزارش‌های سرور را بررسی کنید.
           sp_client_cant_delete_folder: کلاینت در حذف پوشه‌ها در SharePoint مشکل دارد. لطفاً مستندات راه‌اندازی فضای ذخیره‌سازی را بررسی کنید.
           sp_client_id_missing: شناسهٔ کلاینت OAuth 2 برای SharePoint پیکربندی نشده است. لطفاً پیکربندی را بررسی کنید.
@@ -418,10 +418,10 @@ fa:
       nextcloud:
         integration: مدیریت Nextcloud / OpenProject
         oauth_configuration_html: این مقادیر را از [مدیریت Nextcloud / OpenProject](application_link) کپی کنید.
-        provider_configuration_html: پیش از انجام تنظیمات، مطمئن شوید در نمونه Nextcloud خود دسترسی مدیریتی دارید و [برنامه «Integration OpenProject»](application_link) نصب شده است.
+        provider_configuration_html: "پیش از انجام تنظیمات، مطمئن شوید در نمونه Nextcloud خود دسترسی مدیریتی دارید و [برنامه «یکپارچه‌سازی OpenProject»](application_link) نصب شده است."
         storage_audience: شناسهٔ کلاینتی که نمونهٔ Nextcloud برای ارتباط با ارائه‌دهندهٔ هویت استفاده می‌کند.
         storage_audience_placeholder: مثلاً nextcloud
-        token_exchange_scope: scopeهایی که هنگام Token Exchange باید درخواست شوند؛ هر مورد را با یک فاصله از دیگری جدا کنید.
+        token_exchange_scope: "scopeهایی که هنگام توکن Exchange باید درخواست شوند؛ هر مورد را با یک فاصله از دیگری جدا کنید."
       no_specific_folder: به‌طور پیش‌فرض، هنگام بارگذاری فایل هر کاربر از پوشهٔ خانگی خودش شروع می‌کند.
       no_storage_set_up: هنوز هیچ فضای ذخیره‌سازی فایلی راه‌اندازی نشده است.
       not_logged_into_storage: برای انتخاب پوشهٔ پروژه، ابتدا وارد شوید.
@@ -431,8 +431,8 @@ fa:
         drive_id_html: شناسه را از درایو موردنظر طبق مراحل [مستندات فضای ذخیره‌سازی فایل OneDrive](drive_id_guide) کپی کنید.
         integration: OneDrive
         missing_client_id_for_redirect_uri: برای ایجاد URI، مقادیر OAuth را وارد کنید.
-        oauth_client_redirect_uri: این مقدار را به‌عنوان یک Web redirect URI جدید در بخش Redirect URIs کپی کنید.
-        oauth_client_secret: اگر در Client credentials هیچ Application client secretی وجود ندارد، یک مورد جدید ایجاد کنید.
+        oauth_client_redirect_uri: "این مقدار را به‌عنوان یک Web redirect URI جدید در بخش تغییر مسیر URIs کپی کنید."
+        oauth_client_secret: "اگر در سرویس‌گیرنده credentials هیچ Application client secretی وجود ندارد، یک مورد جدید ایجاد کنید."
         oauth_configuration_html: این مقادیر را از برنامه موردنظر در [پرتال Azure](application_link) کپی کنید.
         provider_configuration_html: پیش از انجام تنظیمات، مطمئن شوید در [پرتال Azure](application_link) دسترسی مدیریتی دارید یا با مدیر Microsoft خود تماس بگیرید. همچنین باید در پرتال یک برنامه Azure ثبت کنید یا از یک برنامه موجود برای احراز هویت استفاده کنید.
         tenant_id_html: شناسه Directory (tenant) را از برنامه موردنظر و بخش App registrations در [پرتال Azure](application_link) کپی کنید.
@@ -456,13 +456,13 @@ fa:
     label_edit_storage_access_management: ویرایش مدیریت دسترسی فضای ذخیره‌سازی
     label_edit_storage_automatically_managed_folders: ویرایش پوشه‌های مدیریت‌شدهٔ خودکار فضای ذخیره‌سازی
     label_edit_storage_host: ویرایش میزبان فضای ذخیره‌سازی
-    label_edit_token_exchange: ویرایش پیکربندی Token Exchange
+    label_edit_token_exchange: "ویرایش پیکربندی توکن Exchange"
     label_existing_manual_folder: پوشهٔ موجود با مجوزهای مدیریت‌شدهٔ دستی
     label_file_storage: فضای ذخیره‌سازی فایل
     label_host: نشانی میزبان
     label_inactive: غیرفعال
     label_managed_project_folders:
-      application_password: گذرواژه برنامه
+      application_password: "رمز عبور برنامه"
       automatically_managed_folders: پوشه‌های مدیریت‌شدهٔ خودکار
     label_name: نام
     label_new_file_storage: فضای ذخیره‌سازی جدید %{provider}

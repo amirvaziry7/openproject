@@ -111,6 +111,38 @@ a
   .-placeholder &
     direction: ltr
 
+html[lang="fa"][dir="rtl"]
+  .main-menu--resizer
+    left: auto
+    inset-inline-start: calc(var(--main-menu-width) - 0.25rem)
+
+    .main-menu--navigation-toggler
+      margin-left: 0
+      margin-inline-start: -0.75rem
+
+      &:not(.open)
+        left: auto
+        inset-inline-start: 1rem
+
+      > .collapse-menu,
+      > .expand-menu
+        transform: scaleX(-1)
+
+    &:hover
+      border-right: 0
+      border-inline-end: 0.125rem solid var(--main-menu-border-color)
+
+  pre, code, input[type="email"], input[type="url"], input[type="number"], input[type="tel"], input[type="password"]
+    direction: ltr
+    text-align: left
+    unicode-bidi: isolate
+
+  .form--label
+    text-align: start
+
+  .work-packages-tabletimeline--timeline-side
+    direction: ltr
+
 .-draggable
   cursor: grab
 

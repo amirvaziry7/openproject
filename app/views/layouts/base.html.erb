@@ -32,6 +32,7 @@ See COPYRIGHT and LICENSE files for more details.
 <% main_menu_width = initial_main_menu_width %>
 <% initial_classes = initial_menu_classes(side_displayed, show_decoration, main_menu_width) %>
 <html lang="<%= I18n.locale %>"
+      dir="<%= t(:direction) %>"
       class="<%= class_names(in_modal: !show_decoration) %>"
       <%= tag.attributes(style: initial_html_styles(side_displayed && show_decoration, main_menu_width)) %>>
 <head>
@@ -104,13 +105,13 @@ See COPYRIGHT and LICENSE files for more details.
         <div id="menu-sidebar">
           <div class="main-menu--top-container">
             <%= render(Primer::OpenProject::FlexLayout.new(align_items: :center, pt: 3)) do |flex|
-              flex.with_column(overflow: :hidden) do
-                render_projects_top_menu_node
-              end
-              flex.with_column(text_align: :right, flex: :auto) do
-                render(OpenProject::Common::MainMenuToggleComponent.new(expanded: true))
-              end
-            end %>
+                  flex.with_column(overflow: :hidden) do
+                    render_projects_top_menu_node
+                  end
+                  flex.with_column(text_align: :right, flex: :auto) do
+                    render(OpenProject::Common::MainMenuToggleComponent.new(expanded: true))
+                  end
+                end %>
 
             <%= render(
                   Primer::BaseComponent.new(

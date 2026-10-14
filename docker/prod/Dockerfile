@@ -56,7 +56,7 @@ RUN useradd -d /home/$APP_USER -m $APP_USER && \
 WORKDIR $APP_PATH
 
 # upgrade bundler
-RUN gem install bundler --no-document
+RUN gem install bundler --version 4.0.21 --no-document
 
 # runtime dependencies
 COPY ./docker/prod/setup/preinstall-common.sh ./docker/prod/setup/preinstall-common.sh

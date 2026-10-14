@@ -27,7 +27,7 @@ fa:
         secret: رمز
         slug: شناسه یکتا
         sync_groups: همگام‌سازی گروه‌ها
-        tenant: Tenant
+        tenant: "مستأجر"
         token_endpoint: نقطه پایانی توکن
         userinfo_endpoint: نقطه پایانی اطلاعات کاربر
     errors:
@@ -74,8 +74,8 @@ fa:
       claims: 'می‌توانید برای نقاط پایانی userinfo و ID token، Claimهای بیشتری درخواست کنید. برای اطلاعات بیشتر [مستندات OpenID Connect](docs_url) را ببینید.
 
         '
-      client_id: این همان Client ID است که ارائه‌دهنده OpenID Connect در اختیار شما قرار داده است.
-      client_secret: این همان Client Secret است که ارائه‌دهنده OpenID Connect در اختیار شما قرار داده است.
+      client_id: "این همان سرویس‌گیرنده ID است که ارائه‌دهنده OpenID Connect در اختیار شما قرار داده است."
+      client_secret: "این همان سرویس‌گیرنده کلید محرمانه است که ارائه‌دهنده OpenID Connect در اختیار شما قرار داده است."
       display_name: نام ارائه‌دهنده. این نام روی دکمه ورود و در فهرست ارائه‌دهندگان نمایش داده می‌شود.
       endpoint_url: نشانی نقطه پایانی ارائه‌شده توسط ارائه‌دهنده OpenID Connect
       group_regexes: در هر خط یک الگوی عبارت منظم وارد کنید. برای اطلاعات بیشتر [مستندات](docs_url) را بخوانید.

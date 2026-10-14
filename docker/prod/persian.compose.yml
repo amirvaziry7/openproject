@@ -1,0 +1,14 @@
+x-persian-app: &persian-app
+  image: "${OPENPROJECT_FA_IMAGE:?Set OPENPROJECT_FA_IMAGE to the custom image tag or digest}"
+  environment:
+    OPENPROJECT_DEFAULT__LANGUAGE: "fa"
+
+services:
+  web:
+    <<: *persian-app
+  worker:
+    <<: *persian-app
+  cron:
+    <<: *persian-app
+  seeder:
+    <<: *persian-app

@@ -33,9 +33,9 @@ fa:
       gitlab_pipeline:
         ci_details: جزئیات CI
       gitlab_user:
-        avatar_url: Avatar URL
-        name: Name
-        username: Username
+        avatar_url: "نشانی آواتار"
+        name: "نام"
+        username: "نام کاربری"
     errors:
       models:
         gitlab_issue:
@@ -63,7 +63,7 @@ fa:
         one: کاربر GitLab
         other: کاربران GitLab
   attributes:
-    commit: Commit
+    commit: "ثبت تغییرات"
     gitlab: شناسهٔ GitLab
     gitlab_html_url: URL HTML در GitLab
     gitlab_merge_request: درخواست ادغام
@@ -74,7 +74,7 @@ fa:
       copy_name: کپی نام شاخه
       create_merge_request: ایجاد merge request
       updated_at: به‌روزرسانی‌شده در %{date_time}.
-      updated_by: Last updated by %{name}.
+      updated_by: "آخرین به‌روزرسانی توسط %{name}."
     commit_component:
       authored_at: ثبت‌شده در %{date_time}.
       copy_sha: کپی SHA در کلیپ‌بورد
@@ -88,15 +88,15 @@ fa:
       copy_create_branch_command: کپی فرمان ایجاد شاخه با commit خالی
       create_branch_with_empty_commit: ایجاد شاخه با commit خالی
       title: قطعه‌کدهای سریع Git
-    issue_closed_referenced_comment: "**Issue بسته شد:** Issue شماره %{issue_number} با عنوان [%{issue_title}](%{issue_url}) برای [%{repository}](%{repository_url}) توسط [%{gitlab_user}](%{gitlab_user_url}) بسته شد.\n"
+    issue_closed_referenced_comment: "**مسئله بسته شد:** مسئله شماره %{issue_number} با عنوان [%{issue_title}](%{issue_url}) برای [%{repository}](%{repository_url}) توسط [%{gitlab_user}](%{gitlab_user_url}) بسته شد.\n"
     issue_component:
       states:
         closed: بسته
         opened: باز
       updated_at: به‌روزرسانی‌شده در %{date_time}.
-      updated_by: Last updated by %{name}.
-    issue_opened_referenced_comment: "**Issue باز شد:** Issue شماره %{issue_number} با عنوان [%{issue_title}](%{issue_url}) برای [%{repository}](%{repository_url}) توسط [%{gitlab_user}](%{gitlab_user_url}) باز شد.\n"
-    issue_reopened_referenced_comment: "**Issue دوباره باز شد:** Issue شماره %{issue_number} با عنوان [%{issue_title}](%{issue_url}) برای [%{repository}](%{repository_url}) توسط [%{gitlab_user}](%{gitlab_user_url}) دوباره باز شد.\n"
+      updated_by: "آخرین به‌روزرسانی توسط %{name}."
+    issue_opened_referenced_comment: "**مسئله باز شد:** مسئله شماره %{issue_number} با عنوان [%{issue_title}](%{issue_url}) برای [%{repository}](%{repository_url}) توسط [%{gitlab_user}](%{gitlab_user_url}) باز شد.\n"
+    issue_reopened_referenced_comment: "**مسئله دوباره باز شد:** مسئله شماره %{issue_number} با عنوان [%{issue_title}](%{issue_url}) برای [%{repository}](%{repository_url}) توسط [%{gitlab_user}](%{gitlab_user_url}) دوباره باز شد.\n"
     merge_request_closed_comment: "**MR بسته شد:** Merge Request شماره %{mr_number} با عنوان [%{mr_title}](%{mr_url}) برای [%{repository}](%{repository_url}) توسط [%{gitlab_user}](%{gitlab_user_url}) بسته شد.\n"
     merge_request_component:
       pipeline_statuses:
@@ -119,13 +119,13 @@ fa:
         merged: ادغام‌شده
         opened: باز
       updated_at: به‌روزرسانی‌شده در %{date_time}.
-      updated_by: Last updated by %{name}.
+      updated_by: "آخرین به‌روزرسانی توسط %{name}."
     merge_request_merged_comment: "**MR ادغام شد:** Merge Request شماره %{mr_number} با عنوان [%{mr_title}](%{mr_url}) برای [%{repository}](%{repository_url}) توسط [%{gitlab_user}](%{gitlab_user_url}) ادغام شد.\n"
     merge_request_opened_comment: "**MR باز شد:** Merge Request شماره %{mr_number} با عنوان [%{mr_title}](%{mr_url}) برای [%{repository}](%{repository_url}) توسط [%{gitlab_user}](%{gitlab_user_url}) باز شد.\n"
     merge_request_reopened_comment: "**MR دوباره باز شد:** Merge Request شماره %{mr_number} با عنوان [%{mr_title}](%{mr_url}) برای [%{repository}](%{repository_url}) توسط [%{gitlab_user}](%{gitlab_user_url}) دوباره باز شد.\n"
-    note_commit_referenced_comment: "**ارجاع در Commit:** [%{gitlab_user}](%{gitlab_user_url}) در یادداشت Commit با شناسهٔ [%{commit_id}](%{commit_url}) روی [%{repository}](%{repository_url}) به این بسته کاری ارجاع داد: %{commit_note}\n"
-    note_issue_commented_comment: "**دیدگاه در Issue:** [%{gitlab_user}](%{gitlab_user_url}) دربارهٔ این بسته کاری در Issue شماره %{issue_number} با عنوان [%{issue_title}](%{issue_url}) روی [%{repository}](%{repository_url}) دیدگاه ثبت کرد: %{issue_note}\n"
-    note_issue_referenced_comment: "**ارجاع در Issue:** [%{gitlab_user}](%{gitlab_user_url}) در Issue شماره %{issue_number} با عنوان [%{issue_title}](%{issue_url}) روی [%{repository}](%{repository_url}) به این بسته کاری ارجاع داد: %{issue_note}\n"
+    note_commit_referenced_comment: "**ارجاع در ثبت تغییرات:** [%{gitlab_user}](%{gitlab_user_url}) در یادداشت ثبت تغییرات با شناسهٔ [%{commit_id}](%{commit_url}) روی [%{repository}](%{repository_url}) به این بسته کاری ارجاع داد: %{commit_note}\n"
+    note_issue_commented_comment: "**دیدگاه در مسئله:** [%{gitlab_user}](%{gitlab_user_url}) دربارهٔ این بسته کاری در مسئله شماره %{issue_number} با عنوان [%{issue_title}](%{issue_url}) روی [%{repository}](%{repository_url}) دیدگاه ثبت کرد: %{issue_note}\n"
+    note_issue_referenced_comment: "**ارجاع در مسئله:** [%{gitlab_user}](%{gitlab_user_url}) در مسئله شماره %{issue_number} با عنوان [%{issue_title}](%{issue_url}) روی [%{repository}](%{repository_url}) به این بسته کاری ارجاع داد: %{issue_note}\n"
     note_mr_commented_comment: "**دیدگاه در MR:** [%{gitlab_user}](%{gitlab_user_url}) دربارهٔ این بسته کاری در Merge Request شماره %{mr_number} با عنوان [%{mr_title}](%{mr_url}) روی [%{repository}](%{repository_url}) دیدگاه ثبت کرد: %{mr_note}\n"
     note_mr_referenced_comment: "**ارجاع در MR:** [%{gitlab_user}](%{gitlab_user_url}) در Merge Request شماره %{mr_number} با عنوان [%{mr_title}](%{mr_url}) روی [%{repository}](%{repository_url}) به این بسته کاری ارجاع داد: %{mr_note}\n"
     note_snippet_referenced_comment: "**ارجاع در Snippet:** [%{gitlab_user}](%{gitlab_user_url}) در Snippet شماره %{snippet_number} با عنوان [%{snippet_title}](%{snippet_url}) روی [%{repository}](%{repository_url}) به این بسته کاری ارجاع داد: %{snippet_note}\n"

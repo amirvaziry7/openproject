@@ -32,7 +32,7 @@ fa:
         participant:
           one: ۱ شرکت‌کننده
           other: "%{count} شرکت‌کننده"
-        participants: شركت كنندگان
+        participants: "شرکت کنندگان"
         participants_added: 'شرکت‌کنندگان افزوده‌شده:'
         participants_attended: حاضران
         participants_invited: دعوت کنندگان
@@ -486,6 +486,7 @@ fa:
       previous: قبلی
       title: حالت ارائه
       total_items: "%{current} از %{total}"
+      slide_progress: اسلاید %{current}/%{total}
     types:
       one_time: یک‌باره
       recurring: تکرارشونده
@@ -513,7 +514,7 @@ fa:
     access_token:
       created_dialog:
         token/ical_meeting:
-          body: با URL زیر مانند گذرواژه رفتار کنید. هرکس به آن دسترسی داشته باشد می‌تواند همه جلسات شما را ببیند.
+          body: "با URL زیر مانند رمز عبور رفتار کنید. هرکس به آن دسترسی داشته باشد می‌تواند همه جلسات شما را ببیند."
           title: یک توکن اشتراک iCal جلسات ایجاد شد
       dialog:
         token/ical_meeting:
@@ -752,3 +753,4 @@ fa:
   text_work_package_add_to_meeting_hint: برای افزودن این بسته کاری به یک جلسه پیشِ رو از دکمه «افزودن به جلسه» استفاده کنید.
   text_work_package_has_no_past_meeting_agenda_items: این بسته کاری در هیچ جلسه گذشته‌ای به‌عنوان مورد دستور جلسه اضافه نشده است.
   text_work_package_has_no_upcoming_meeting_agenda_items: این بسته کاری هنوز در دستور جلسه آینده‌ای زمان‌بندی نشده است.
+  text_agenda_item_moved_to_backlog: مورد دستور جلسه به کارهای معوق منتقل شد

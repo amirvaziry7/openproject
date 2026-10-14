@@ -65,6 +65,7 @@ export class MainMenuResizerComponent extends UntilDestroyedMixin {
 
   private readonly widthAtDragStart = signal<number>(0);
   private readonly mainMenu = document.querySelector('#main-menu')!;
+  private resizedSincePointerDown = false;
 
   readonly isOpen = this.toggleService.isOpen;
 
@@ -83,19 +84,26 @@ export class MainMenuResizerComponent extends UntilDestroyedMixin {
     menu_resize: this.I18n.t('js.label_resize_project_menu')
   };
 
-  public toggle(event:Event) {
+  public toggle(event:MouseEvent) {
     event.stopPropagation();
     event.preventDefault();
-    this.toggleService.toggle();
+    if (event.detail === 0 || !this.resizedSincePointerDown) {
+      this.toggleService.toggle();
+    }
   }
 
   public resizeStart() {
+    this.resizedSincePointerDown = false;
     this.widthAtDragStart.set(this.mainMenu.clientWidth);
     this.isResizing.set(true);
   }
 
   public resizeMove(deltas:ResizeDelta) {
-    this.toggleService.resizeTo(this.widthAtDragStart() + deltas.absolute.x);
+    this.resizedSincePointerDown ||= Math.abs(deltas.absolute.x) > 2;
+    const horizontalDelta = getComputedStyle(this.mainMenu).direction === 'rtl'
+      ? -deltas.absolute.x
+      : deltas.absolute.x;
+    this.toggleService.resizeTo(this.widthAtDragStart() + horizontalDelta);
   }
 
   public resizeEnd() {
