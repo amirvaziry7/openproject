@@ -117,6 +117,13 @@ RSpec.describe "Localization", with_settings: { login_required?: false,
       expect(page).to have_css('html[lang="en"][dir="ltr"]', visible: :all)
     end
 
+    it "offers only Persian and English in the header",
+       with_settings: { available_languages: %w[de en fa] } do
+      visit signin_path
+
+      expect(page).to have_select("ui_language", options: ["English", "فارسی"])
+    end
+
     it "ignores unsupported or malformed language selections" do
       Capybara.current_session.driver.header("Accept-Language", "en")
 

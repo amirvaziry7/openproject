@@ -1,5 +1,22 @@
 # Persian localization validation — 2026-10-14
 
+## Persian and English dropdown
+
+The current candidate is `ghcr.io/amirvaziry7/openproject:18.0.0-fa.6-b68de2b1c14`.
+The header selector offers only Persian and English, filtering the existing
+enabled-language options. A regression test enables German alongside these two
+and verifies that the header still contains exactly English and فارسی.
+The focused Rails run passed **21 examples, 0 failures**; the selector template
+also passed ERB lint and the changed files passed `git diff --check`.
+The production image build succeeded and its baked audit passed with 10,514
+source leaves and zero errors. Local image ID:
+`sha256:6ad436fb432aed4debc7cf98e56f8df9a3d07fd325f5b1aae7f63e9a7bd89972`.
+Source manifest SHA256:
+`a33694823396dde84d538640a0ea9088755bac4cb8406e6c0a2c05b4a9ff358a`.
+Chrome confirmed exactly the `en` and `fa` options, automatic language switching,
+session persistence, mobile layout, and navigation through authenticated pages
+against the updated local staging image. Its database and volumes were retained.
+
 ## Header language selector
 
 The updated candidate is `ghcr.io/amirvaziry7/openproject:18.0.0-fa.5-133f281f558`.

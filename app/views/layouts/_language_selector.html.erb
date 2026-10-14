@@ -26,6 +26,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 See COPYRIGHT and LICENSE files for more details.
 
 ++#%>
+<% language_options = lang_options_for_select(false).select { |_, language| %w[en fa].include?(language) } %>
 <%= form_tag request.path,
              method: :get,
              class: "op-language-selector",
@@ -33,7 +34,7 @@ See COPYRIGHT and LICENSE files for more details.
   <%= hidden_field_tag :back_url, params[:back_url] if params[:back_url].is_a?(String) %>
   <%= label_tag :ui_language, t(:label_language), class: "sr-only" %>
   <%= select_tag :ui_language,
-                 options_for_select(lang_options_for_select(false), I18n.locale.to_s),
+                 options_for_select(language_options, I18n.locale.to_s),
                  class: "form--select",
                  data: { action: "change->form-preview#submit" } %>
   <%= submit_tag t(:button_apply), name: nil, class: "button -small" %>
