@@ -11,6 +11,11 @@ import tarfile
 
 
 EXTRA_PATHS = [
+    "frontend/src/assets/fonts/vazir/Vazir-Regular.woff2",
+    "frontend/src/assets/fonts/vazir/Vazir-Medium.woff2",
+    "frontend/src/assets/fonts/vazir/Vazir-Bold.woff2",
+    "frontend/src/assets/fonts/vazir/OFL.txt",
+    "frontend/src/assets/fonts/vazir/README.md",
     "app/views/layouts/_language_selector.html.erb",
     "script/i18n/check_persian",
     "script/i18n/prepare_docker_context.py",
@@ -49,7 +54,13 @@ def refresh_snapshot(archive, manifest_path, root):
             path = root / name
             if not path.is_file():
                 continue
-            data = path.read_bytes().replace(b"\r\n", b"\n")
+            data = path.read_bytes()
+            try:
+                data.decode("utf-8")
+                if b"\0" not in data:
+                    data = data.replace(b"\r\n", b"\n")
+            except UnicodeDecodeError:
+                pass
             info = tarfile.TarInfo(name)
             info.mode = 0o644
             info.size = len(data)
@@ -82,7 +93,7 @@ def main():
     parser.add_argument("--reuse", action="store_true", help="Build the previously recorded snapshot")
     parser.add_argument("--refresh", action="store_true", help="Update the snapshot from changed tracked files and the explicit extras")
     parser.add_argument("--target", default="slim")
-    parser.add_argument("--tag", default="ghcr.io/amirvaziry7/openproject:18.0.0-fa.6-b68de2b1c14")
+    parser.add_argument("--tag", default="ghcr.io/amirvaziry7/openproject:18.0.0-fa.7-db931a12227")
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[2]
     output = root / "tmp" / "persian-build"

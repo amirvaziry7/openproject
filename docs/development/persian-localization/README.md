@@ -139,6 +139,11 @@ rewritten. Users can permanently select فارسی in their language and region 
 No user preferences or database records are rewritten. Rails' English fallback
 locale is retained.
 
+Persian pages use locally bundled Vazir v30.1.0 WOFF2 fonts in regular, medium
+and bold weights. The application and Primer font variables switch on
+`html[lang="fa"]`; English uses its existing font stack. Font files and the
+original SIL Open Font License are in `frontend/src/assets/fonts/vazir/`.
+
 Application, login and HTML email layouts now use the existing `direction`
 translation (`rtl` in Persian, `ltr` in English). The Persian-only Sass rule
 keeps code, email/URL/telephone/numeric/password inputs and the Gantt timeline

@@ -1,5 +1,28 @@
 # Persian localization validation — 2026-10-14
 
+## Vazir font for Persian
+
+The Vazir candidate is `ghcr.io/amirvaziry7/openproject:18.0.0-fa.7-db931a12227`.
+It bundles original Vazir v30.1.0 regular, medium and bold WOFF2 assets with their
+SIL Open Font License. Font selection is scoped to Persian HTML and covers the
+application and Primer font variables.
+
+The source-context refresh now preserves newly added binary files. The three
+WOFF2 assets were verified to match the build archive byte for byte.
+Source manifest SHA256:
+`aa1e5df8348d0588a6e2851f48e7acd995d6f20f402f8b7c89973921da943f9b`.
+
+The production Docker build succeeded. Local image ID:
+`sha256:588c408dc9bbba520b08962cd0bd5274b0282f44de7e1e4cbb2c225e0a8a1885`.
+Its baked translation audit passed with 10,514 leaves and zero errors.
+Chrome verified all three font weights loaded successfully from local URLs,
+the Persian login body/heading/labels/inputs/buttons/selector used Vazir, and
+the heading actually rendered custom Vazir glyphs using the browser's font
+inspection API. English restored its original font stack and LTR direction.
+Authenticated project, work-package and administration pages also used Vazir.
+Desktop/mobile screenshots were captured in `tmp/persian-validation/`, alongside
+`vazir-results.json`. Only local staging web/worker containers were recreated.
+
 ## Persian and English dropdown
 
 The current candidate is `ghcr.io/amirvaziry7/openproject:18.0.0-fa.6-b68de2b1c14`.

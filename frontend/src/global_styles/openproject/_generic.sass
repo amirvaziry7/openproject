@@ -26,6 +26,33 @@
 //++
 @import mixins
 
+@font-face
+  font-family: "Vazir"
+  src: url("../../assets/fonts/vazir/Vazir-Regular.woff2") format("woff2")
+  font-weight: 400
+  font-style: normal
+  font-display: swap
+
+@font-face
+  font-family: "Vazir"
+  src: url("../../assets/fonts/vazir/Vazir-Medium.woff2") format("woff2")
+  font-weight: 500
+  font-style: normal
+  font-display: swap
+
+@font-face
+  font-family: "Vazir"
+  src: url("../../assets/fonts/vazir/Vazir-Bold.woff2") format("woff2")
+  font-weight: 700
+  font-style: normal
+  font-display: swap
+
+html[lang="fa"]
+  --body-font-family: "Vazir", "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"
+  --fontStack-sansSerif: var(--body-font-family)
+  --fontStack-sansSerifDisplay: var(--body-font-family)
+  --fontStack-system: var(--body-font-family)
+
 a
   text-decoration: var(--link-text-decoration)
 
