@@ -1,5 +1,7 @@
 <% unless apply_custom_favicon? %>
-  <%= favicon_link_tag OpenProject::CustomStyles::Design.favicon_asset_path %>
+  <%= favicon_link_tag OpenProject::CustomStyles::Design.favicon_asset_path,
+                       type: "image/svg+xml",
+                       sizes: "any" %>
 <% end %>
 
 <% unless apply_custom_touch_icon? %>
@@ -7,5 +9,5 @@
   <%= favicon_link_tag OpenProject::CustomStyles::Design.apple_touch_icon_asset_path,
                        rel: "apple-touch-icon",
                        type: "image/png",
-                       sizes: "120x120" %>
+                       sizes: "any" %>
 <% end %>

@@ -11,6 +11,8 @@ import tarfile
 
 
 EXTRA_PATHS = [
+    "app/assets/images/university_logo.png",
+    "public/favicon.svg",
     "frontend/src/assets/fonts/vazir/Vazir-Regular.woff2",
     "frontend/src/assets/fonts/vazir/Vazir-Medium.woff2",
     "frontend/src/assets/fonts/vazir/Vazir-Bold.woff2",
@@ -93,7 +95,7 @@ def main():
     parser.add_argument("--reuse", action="store_true", help="Build the previously recorded snapshot")
     parser.add_argument("--refresh", action="store_true", help="Update the snapshot from changed tracked files and the explicit extras")
     parser.add_argument("--target", default="slim")
-    parser.add_argument("--tag", default="ghcr.io/amirvaziry7/openproject:18.0.0-fa.7-db931a12227")
+    parser.add_argument("--tag", default="ghcr.io/amirvaziry7/openproject:18.0.0-fa.8-e56ccd23c5c")
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[2]
     output = root / "tmp" / "persian-build"

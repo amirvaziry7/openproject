@@ -33,6 +33,7 @@ See COPYRIGHT and LICENSE files for more details.
 <%= render Homescreen::AnnouncementComponent.new(announcement: Announcement.active_and_current) %>
 
 <div id="login-form" class="form -bordered">
+  <%= image_tag "university_logo.png", alt: t(:label_home), class: "op-institution-logo" %>
   <h1><%= I18n.t(:label_login) %></h1>
 
   <hr class="form--separator">

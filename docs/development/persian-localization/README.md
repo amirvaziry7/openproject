@@ -144,6 +144,13 @@ and bold weights. The application and Primer font variables switch on
 `html[lang="fa"]`; English uses its existing font stack. Font files and the
 original SIL Open Font License are in `frontend/src/assets/fonts/vazir/`.
 
+The institutional logo is stored in `app/assets/images/university_logo.png`.
+The supplied 1060 × 1500 PNG is preserved unchanged in the desktop/theme,
+touch-icon, PDF-export, style-guide and BIM default logo assets. The mobile and
+favicon SVG assets embed the same PNG without redrawing or changing its text.
+The login page displays the full portrait logo at 180px high with its original
+proportions; the header scales it to fit its existing logo area.
+
 Application, login and HTML email layouts now use the existing `direction`
 translation (`rtl` in Persian, `ltr` in English). The Persian-only Sass rule
 keeps code, email/URL/telephone/numeric/password inputs and the Gantt timeline

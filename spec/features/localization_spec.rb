@@ -75,6 +75,8 @@ RSpec.describe "Localization", with_settings: { login_required?: false,
       visit signin_path
 
       expect(page).to have_css('html[lang="fa"][dir="rtl"]', visible: :all)
+      expect(page).to have_css('img.op-institution-logo[src*="university_logo"]')
+      expect(page).to have_css('link[rel="icon"][type="image/svg+xml"][href*="icon_logo"]', visible: :all)
     end
 
     it "preserves an explicit English user preference" do

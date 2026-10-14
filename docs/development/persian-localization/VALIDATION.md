@@ -1,5 +1,40 @@
 # Persian localization validation — 2026-10-14
 
+## Institutional logo
+
+The branded candidate is `ghcr.io/amirvaziry7/openproject:18.0.0-fa.8-e56ccd23c5c`.
+It uses the supplied `logouni.png` for the default application branding and
+displays the full portrait on the login page. Ten PNG assets and four SVG
+wrappers were verified to preserve the exact original image bytes, including
+their contents in the source archive. SVG wrappers embed the original PNG;
+the artwork and Persian text were not regenerated.
+
+The focused localization/service/branding-helper run passed **52 examples,
+0 failures**. Both changed ERB templates passed lint. RuboCop passed with the
+existing missing frozen-string-comment rule excluded for the branding design
+helper. The default export logo decoded as 1060 × 1500 and rendered successfully
+using the application's PDF logo module with Prawn; the result is stored in
+ignored `tmp/university-logo.pdf`. This checks PDF embedding, not a complete
+browser-driven export workflow.
+
+The production image build succeeded and its translation audit passed with
+10,514 leaves and zero errors. Local image ID:
+`sha256:98004fa7ccdef254f72858bd76bbb38fc0998a44b0d2f273fb6b29b9e50cce16`.
+Source manifest SHA256:
+`a1b5d8e4af6d8c53e1107662e777f48ac29552193c8ca94a99123b32768973b8`.
+Docker Desktop was stopped initially; its installed per-user application was
+started locally. Existing staging data and volumes were retained. No production
+connection or image publication occurred.
+
+Chrome verified the exact supplied image on desktop/mobile login pages, default
+header assets, SVG favicon, touch icon, English login, and authenticated project,
+work-package and administration pages. The existing saved staging login session
+had expired; signing in normally with the existing staging admin credentials
+restored it without resetting the account. Desktop/mobile screenshots were
+inspected; the portrait logo retains its proportions and the mobile form remains
+usable. Results are saved to `tmp/persian-validation/university-brand-results.json`.
+The mobile navigation dialog was also opened and its visible logo verified.
+
 ## Vazir font for Persian
 
 The Vazir candidate is `ghcr.io/amirvaziry7/openproject:18.0.0-fa.7-db931a12227`.

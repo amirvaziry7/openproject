@@ -48,11 +48,7 @@ module OpenProject::CustomStyles
     ##
     # Path to favicon
     def favicon_asset_path
-      if OpenProject::Configuration.development_highlight_enabled?
-        "development/favicon.ico".freeze
-      else
-        "favicon.ico".freeze
-      end
+      "icon_logo.svg".freeze
     end
 
     ##

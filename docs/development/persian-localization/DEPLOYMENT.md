@@ -1,9 +1,9 @@
 # Persian image build, staging and production rollout
 
 The versioned candidate is
-`ghcr.io/amirvaziry7/openproject:18.0.0-fa.7-db931a12227` for Linux/amd64.
-It contains the working-tree Vazir font changes on dropdown commit
-`db931a12227`. The source
+`ghcr.io/amirvaziry7/openproject:18.0.0-fa.8-e56ccd23c5c` for Linux/amd64.
+It contains the working-tree institutional branding changes on Vazir commit
+`e56ccd23c5c`. The source
 manifest in `tmp/persian-build/source-manifest.json` records the exact normalized
 source used to build it. This is a local image tag, not a published GHCR image.
 
@@ -16,6 +16,8 @@ Selecting an enabled language reloads the whole page and remembers the choice
 in the session. It preserves the login return URL and saved account preferences.
 The `.6` candidate limits the header dropdown to Persian and English.
 The `.7` candidate bundles Vazir v30.1.0 fonts for Persian pages.
+The `.8` candidate replaces default application branding with the supplied
+institutional logo and displays it prominently on the login page.
 Authentication and project-management business logic are
 unchanged. See [validation results](VALIDATION.md) for the tested scope, limits
 and the unresolved anonymous time-entry bootstrap error.
@@ -25,9 +27,9 @@ and the unresolved anonymous time-entry bootstrap error.
 From `D:\MyProject\openproject` in PowerShell:
 
 ```powershell
-python script/i18n/prepare_docker_context.py --build --tag ghcr.io/amirvaziry7/openproject:18.0.0-fa.7-db931a12227
-docker image inspect ghcr.io/amirvaziry7/openproject:18.0.0-fa.7-db931a12227
-docker run --rm ghcr.io/amirvaziry7/openproject:18.0.0-fa.7-db931a12227 ruby script/i18n/check_persian
+python script/i18n/prepare_docker_context.py --build --tag ghcr.io/amirvaziry7/openproject:18.0.0-fa.8-e56ccd23c5c
+docker image inspect ghcr.io/amirvaziry7/openproject:18.0.0-fa.8-e56ccd23c5c
+docker run --rm ghcr.io/amirvaziry7/openproject:18.0.0-fa.8-e56ccd23c5c ruby script/i18n/check_persian
 ```
 
 The helper supplies a source tar archive to the repository's
@@ -58,7 +60,7 @@ repository-supported command is:
 ```sh
 docker build --platform linux/amd64 --progress=plain --target slim \
   -f docker/prod/Dockerfile \
-  -t ghcr.io/amirvaziry7/openproject:18.0.0-fa.7-db931a12227 .
+  -t ghcr.io/amirvaziry7/openproject:18.0.0-fa.8-e56ccd23c5c .
 ```
 
 Use `slim-bim` if the deployment requires the BIM edition. The validated target
@@ -82,7 +84,7 @@ URL, volume or network is referenced. The application database is
 For a new staging environment, run the following from the repository root:
 
 ```powershell
-python script/i18n/create_staging_env.py --image ghcr.io/amirvaziry7/openproject:18.0.0-fa.7-db931a12227
+python script/i18n/create_staging_env.py --image ghcr.io/amirvaziry7/openproject:18.0.0-fa.8-e56ccd23c5c
 docker compose --env-file tmp/persian-staging.env -f docker/prod/persian.staging.compose.yml config --quiet
 docker compose --env-file tmp/persian-staging.env -f docker/prod/persian.staging.compose.yml up -d db cache
 docker compose --env-file tmp/persian-staging.env -f docker/prod/persian.staging.compose.yml run --rm seeder
@@ -154,7 +156,7 @@ No registry login, image push or Git push was performed. After explicit approval
 and GHCR authentication, the publication command is:
 
 ```sh
-docker push ghcr.io/amirvaziry7/openproject:18.0.0-fa.7-db931a12227
+docker push ghcr.io/amirvaziry7/openproject:18.0.0-fa.8-e56ccd23c5c
 ```
 
 Record the published registry digest and deploy by digest where possible.
@@ -208,7 +210,7 @@ validation, obtaining publication approval and publishing the image:
    digest in the operator's shell; no existing `.env` value needs replacement:
 
    ```sh
-   export OPENPROJECT_FA_IMAGE=ghcr.io/amirvaziry7/openproject:18.0.0-fa.7-db931a12227
+   export OPENPROJECT_FA_IMAGE=ghcr.io/amirvaziry7/openproject:18.0.0-fa.8-e56ccd23c5c
    docker compose -p "$ORIGINAL_PROJECT" -f docker-compose.yml -f persian.compose.yml config --quiet
    docker compose -p "$ORIGINAL_PROJECT" -f docker-compose.yml -f persian.compose.yml config --images
    docker compose -p "$ORIGINAL_PROJECT" -f docker-compose.yml -f persian.compose.yml pull web worker cron
