@@ -77,6 +77,9 @@ services:
       DATABASE_URL: "postgres://openproject_fa_stage:${OPENPROJECT_FA_STAGE_DB_PASSWORD:?Set a staging database password}@db/openproject_fa_test?pool=20"
       SECRET_KEY_BASE: "${OPENPROJECT_FA_STAGE_SECRET_KEY_BASE:?Set a staging secret key}"
     volumes:
+      - ../../app/controllers/application_controller.rb:/app/app/controllers/application_controller.rb:ro
+      - ../../app/views/layouts/_language_selector.html.erb:/app/app/views/layouts/_language_selector.html.erb:ro
+      - ../../app/views/layouts/only_logo.html.erb:/app/app/views/layouts/only_logo.html.erb:ro
       - ../../script/i18n/check_persian:/app/script/i18n/check_persian:ro
       - ../../spec/features/localization_spec.rb:/app/spec/features/localization_spec.rb:ro
       - ../../app/views/layouts/base.html.erb:/app/app/views/layouts/base.html.erb:ro

@@ -42,6 +42,9 @@ See COPYRIGHT and LICENSE files for more details.
         </div>
         <%= link_to(I18n.t("label_home"), configurable_home_url, class: "op-logo--icon op-logo--link op-logo--icon_white") %>
       </div>
+      <div class="op-app-header--end">
+        <%= render partial: "layouts/language_selector" %>
+      </div>
     </header>
     <main id="content-wrapper">
       <%= yield %>

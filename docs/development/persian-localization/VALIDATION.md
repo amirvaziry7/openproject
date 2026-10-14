@@ -1,6 +1,39 @@
 # Persian localization validation — 2026-10-14
 
-The final local candidate is
+## Header language selector
+
+The updated candidate is `ghcr.io/amirvaziry7/openproject:18.0.0-fa.5-133f281f558`.
+It adds a session language selector to the application and logo-only headers.
+The selection overrides browser/account defaults for the session without
+rewriting account preferences or changing authentication behavior.
+
+The focused Rails run completed **20 examples, 0 failures**, covering language
+switching, persistence across pages, login return URLs, invalid/array parameters,
+and unchanged account preferences. All three modified ERB templates passed lint.
+RuboCop found six existing controller offenses outside the edited localization
+methods; excluding their four existing rules yielded no offenses. The changed
+files also passed `git diff --check`.
+
+Screenshot review caught malformed copyright delimiter text in the initial
+`.4` selector partial. This was corrected in `.5` and covered by a regression
+assertion. The earlier image validation below describes the previous `.3` build.
+
+The `.5` production Docker build completed successfully. Its baked translation
+audit checked **10,514 source leaves, 0 errors**. Local image ID:
+`sha256:87f7d46731cdadac65272f3f92348ba02560e7a03235c84419cdd2c8ccf729ff`.
+Source manifest SHA256:
+`8a55e28bbbd6dc333cb8c7c247eca6be1703e8c8b10de6975da791b8acdb3d74`.
+Only local staging web/worker containers were recreated, retaining its database
+and volumes. No production connection, image publication or Git push occurred.
+
+Installed Chrome verified automatic Persian/English switching, both HTML and
+frontend locales, RTL/LTR direction, retained login return URLs, persistence on
+subsequent pages, and selection on authenticated projects/work-package pages.
+The selector fit within a 390px mobile viewport. Final desktop/mobile screenshots
+were inspected, and no copyright delimiter text remained. Browser results and
+screenshots are stored in ignored `tmp/persian-validation/`.
+
+The earlier validated local candidate is
 `ghcr.io/amirvaziry7/openproject:18.0.0-fa.3-d0d7ca836aa5`, Linux/amd64,
 713,567,129 bytes as reported by Docker image inspection.
 

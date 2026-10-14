@@ -1,0 +1,40 @@
+<%#-- copyright
+OpenProject is an open source project management software.
+Copyright (C) the OpenProject GmbH
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License version 3.
+
+OpenProject is a fork of ChiliProject, which is a fork of Redmine. The copyright follows:
+Copyright (C) 2006-2013 Jean-Philippe Lang
+Copyright (C) 2010-2013 the ChiliProject Team
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+See COPYRIGHT and LICENSE files for more details.
+
+++#%>
+<%= form_tag request.path,
+             method: :get,
+             class: "op-language-selector",
+             data: { turbo: false, controller: "form-preview", "form-preview-url-value": request.path } do %>
+  <%= hidden_field_tag :back_url, params[:back_url] if params[:back_url].is_a?(String) %>
+  <%= label_tag :ui_language, t(:label_language), class: "sr-only" %>
+  <%= select_tag :ui_language,
+                 options_for_select(lang_options_for_select(false), I18n.locale.to_s),
+                 class: "form--select",
+                 data: { action: "change->form-preview#submit" } %>
+  <%= submit_tag t(:button_apply), name: nil, class: "button -small" %>
+<% end %>

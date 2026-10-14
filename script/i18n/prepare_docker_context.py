@@ -11,6 +11,7 @@ import tarfile
 
 
 EXTRA_PATHS = [
+    "app/views/layouts/_language_selector.html.erb",
     "script/i18n/check_persian",
     "script/i18n/prepare_docker_context.py",
     "docker/prod/persian.compose.yml",
@@ -81,7 +82,7 @@ def main():
     parser.add_argument("--reuse", action="store_true", help="Build the previously recorded snapshot")
     parser.add_argument("--refresh", action="store_true", help="Update the snapshot from changed tracked files and the explicit extras")
     parser.add_argument("--target", default="slim")
-    parser.add_argument("--tag", default="ghcr.io/amirvaziry7/openproject:18.0.0-fa.3-d0d7ca836aa5")
+    parser.add_argument("--tag", default="ghcr.io/amirvaziry7/openproject:18.0.0-fa.5-133f281f558")
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[2]
     output = root / "tmp" / "persian-build"

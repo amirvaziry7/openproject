@@ -129,7 +129,12 @@ valid even when absent from an older saved available-language list.
 Locale selection still follows `SetLocalizationService`: explicit user
 preference, supported browser Accept-Language, then instance default. Consequently
 an English browser or a user with an English preference can still see English.
-Users can explicitly select فارسی in their language and region settings.
+The header language selector overrides these defaults for the current browser
+session, including before login. It reloads the page when the selection changes;
+the Apply button also works without JavaScript. Only enabled languages are
+accepted. Switching to Persian applies RTL, and switching to English restores
+LTR. The login return URL is preserved, and saved account preferences are not
+rewritten. Users can permanently select فارسی in their language and region settings.
 No user preferences or database records are rewritten. Rails' English fallback
 locale is retained.
 

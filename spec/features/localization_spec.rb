@@ -95,5 +95,48 @@ RSpec.describe "Localization", with_settings: { login_required?: false,
 
       expect(page).to have_css('html[lang="en"][dir="ltr"]', visible: :all)
     end
+
+    it "switches the login language and remembers it on subsequent pages" do
+      Capybara.current_session.driver.header("Accept-Language", "en")
+      visit signin_path(back_url: projects_path)
+
+      expect(page).to have_select("ui_language", selected: "English")
+      expect(page).to have_no_text("<++#%>")
+      select "فارسی", from: "ui_language"
+      click_button "Apply"
+
+      expect(page).to have_css('html[lang="fa"][dir="rtl"]', visible: :all)
+      expect(page).to have_select("ui_language", selected: "فارسی")
+      expect(page).to have_field("back_url", with: projects_path, type: :hidden)
+
+      visit projects_path
+      expect(page).to have_css('html[lang="fa"][dir="rtl"]', visible: :all)
+
+      select "English", from: "ui_language"
+      find('.op-language-selector input[type="submit"]').click
+      expect(page).to have_css('html[lang="en"][dir="ltr"]', visible: :all)
+    end
+
+    it "ignores unsupported or malformed language selections" do
+      Capybara.current_session.driver.header("Accept-Language", "en")
+
+      visit signin_path(ui_language: "zz")
+      expect(page).to have_css('html[lang="en"][dir="ltr"]', visible: :all)
+
+      visit signin_path(ui_language: ["fa"])
+      expect(page).to have_css('html[lang="en"][dir="ltr"]', visible: :all)
+    end
+
+    it "switches an authenticated session without changing the account preference" do
+      user = create(:user, language: "en")
+      login_as(user)
+
+      visit projects_path(ui_language: "fa")
+      expect(page).to have_css('html[lang="fa"][dir="rtl"]', visible: :all)
+      expect(user.reload.language).to eq("en")
+
+      visit projects_path
+      expect(page).to have_css('html[lang="fa"][dir="rtl"]', visible: :all)
+    end
   end
 end
