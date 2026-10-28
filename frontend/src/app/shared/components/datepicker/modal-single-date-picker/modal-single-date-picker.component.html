@@ -13,8 +13,8 @@
         class="spot-input"
         [attr.data-value]="value"
         [id]="id"
-        [ngModel]="value"
-        (ngModelChange)="changeValueFromInputDebounced($event)"
+        [ngModel]="displayDate(value)"
+        (ngModelChange)="changeDisplayedInput($event)"
         (click)="onInputClick($event)"
         (focus)="opened = true"
         />
@@ -53,9 +53,9 @@
         >
         <spot-text-field slot="input"
           name="date"
-          [ngModel]="workingValue"
+          [ngModel]="displayDate(workingValue)"
           [required]="required"
-          (ngModelChange)="writeWorkingValue($event)"
+          (ngModelChange)="changeWorkingInput($event)"
           [showClearButton]="true"
          />
         <button
@@ -80,6 +80,7 @@
           ></button>
           <button
             type="submit"
+            [disabled]="invalidDateInput"
             class="button -primary spot-action-bar--action"
             data-test-selector="op-datepicker-modal--action"
             [textContent]="applyLabel"

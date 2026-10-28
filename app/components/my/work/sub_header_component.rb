@@ -39,13 +39,13 @@ module My
       def title
         case mode
         when :day
-          I18n.l(date, format: :long)
+          helpers.format_calendar_date(date, format: :long)
         when :week
           week_date_range(date)
         when :workweek
           workweek_date_range(date)
         when :month
-          I18n.l(date, format: "%B %Y")
+          helpers.format_calendar_date(date, format: "%B %Y")
         end
       end
 

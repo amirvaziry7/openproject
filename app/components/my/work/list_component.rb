@@ -73,7 +73,7 @@ module My
         if mode == :month
           week_date_range(date)
         else
-          I18n.l(date, format: "%A %d")
+          helpers.format_calendar_date(date, format: "%A %d")
         end
       end
 

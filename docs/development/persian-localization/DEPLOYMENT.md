@@ -1,9 +1,9 @@
 # Persian image build, staging and production rollout
 
 The versioned candidate is
-`ghcr.io/amirvaziry7/openproject:18.0.0-fa.8-e56ccd23c5c` for Linux/amd64.
-It contains the working-tree institutional branding changes on Vazir commit
-`e56ccd23c5c`. The source
+`ghcr.io/amirvaziry7/openproject:18.0.0-fa.17-a76b3e10c81` for Linux/amd64.
+It contains the working-tree Persian calendar, institutional display-name and footer changes on branding commit
+`a76b3e10c81`. The source
 manifest in `tmp/persian-build/source-manifest.json` records the exact normalized
 source used to build it. This is a local image tag, not a published GHCR image.
 
@@ -18,6 +18,20 @@ The `.6` candidate limits the header dropdown to Persian and English.
 The `.7` candidate bundles Vazir v30.1.0 fonts for Persian pages.
 The `.8` candidate replaces default application branding with the supplied
 institutional logo and displays it prominently on the login page.
+The `.9` candidate adds the requested Persian institutional footer to the
+application and logo-only layouts, including when the interface is English.
+The `.12` candidate uses the full Persian institutional application name in
+English/Persian interface text, application titles, mail metadata and seed
+display names. Protocol identifiers, URLs and upstream copyright notices remain
+unchanged. `.10` and `.11` were intermediate local candidates.
+
+The `.17` candidate adds Jalali date display and date selection for Persian
+sessions, including Nowruz and leap-year Esfand. English remains Gregorian.
+All persisted dates and scheduling calculations retain their Gregorian ISO
+representation. The earlier `.12` candidate used a seed-only overlay; **do not
+use that Dockerfile for the calendar changes**, which require the full build
+below. Intermediate local builds were used for isolated browser validation.
+
 Authentication and project-management business logic are
 unchanged. See [validation results](VALIDATION.md) for the tested scope, limits
 and the unresolved anonymous time-entry bootstrap error.
@@ -27,9 +41,9 @@ and the unresolved anonymous time-entry bootstrap error.
 From `D:\MyProject\openproject` in PowerShell:
 
 ```powershell
-python script/i18n/prepare_docker_context.py --build --tag ghcr.io/amirvaziry7/openproject:18.0.0-fa.8-e56ccd23c5c
-docker image inspect ghcr.io/amirvaziry7/openproject:18.0.0-fa.8-e56ccd23c5c
-docker run --rm ghcr.io/amirvaziry7/openproject:18.0.0-fa.8-e56ccd23c5c ruby script/i18n/check_persian
+python script/i18n/prepare_docker_context.py --build --tag ghcr.io/amirvaziry7/openproject:18.0.0-fa.17-a76b3e10c81
+docker image inspect ghcr.io/amirvaziry7/openproject:18.0.0-fa.17-a76b3e10c81
+docker run --rm ghcr.io/amirvaziry7/openproject:18.0.0-fa.17-a76b3e10c81 ruby script/i18n/check_persian
 ```
 
 The helper supplies a source tar archive to the repository's
@@ -60,7 +74,7 @@ repository-supported command is:
 ```sh
 docker build --platform linux/amd64 --progress=plain --target slim \
   -f docker/prod/Dockerfile \
-  -t ghcr.io/amirvaziry7/openproject:18.0.0-fa.8-e56ccd23c5c .
+  -t ghcr.io/amirvaziry7/openproject:18.0.0-fa.17-a76b3e10c81 .
 ```
 
 Use `slim-bim` if the deployment requires the BIM edition. The validated target
@@ -84,7 +98,7 @@ URL, volume or network is referenced. The application database is
 For a new staging environment, run the following from the repository root:
 
 ```powershell
-python script/i18n/create_staging_env.py --image ghcr.io/amirvaziry7/openproject:18.0.0-fa.8-e56ccd23c5c
+python script/i18n/create_staging_env.py --image ghcr.io/amirvaziry7/openproject:18.0.0-fa.17-a76b3e10c81
 docker compose --env-file tmp/persian-staging.env -f docker/prod/persian.staging.compose.yml config --quiet
 docker compose --env-file tmp/persian-staging.env -f docker/prod/persian.staging.compose.yml up -d db cache
 docker compose --env-file tmp/persian-staging.env -f docker/prod/persian.staging.compose.yml run --rm seeder
@@ -156,7 +170,7 @@ No registry login, image push or Git push was performed. After explicit approval
 and GHCR authentication, the publication command is:
 
 ```sh
-docker push ghcr.io/amirvaziry7/openproject:18.0.0-fa.8-e56ccd23c5c
+docker push ghcr.io/amirvaziry7/openproject:18.0.0-fa.17-a76b3e10c81
 ```
 
 Record the published registry digest and deploy by digest where possible.
@@ -210,7 +224,7 @@ validation, obtaining publication approval and publishing the image:
    digest in the operator's shell; no existing `.env` value needs replacement:
 
    ```sh
-   export OPENPROJECT_FA_IMAGE=ghcr.io/amirvaziry7/openproject:18.0.0-fa.8-e56ccd23c5c
+   export OPENPROJECT_FA_IMAGE=ghcr.io/amirvaziry7/openproject:18.0.0-fa.17-a76b3e10c81
    docker compose -p "$ORIGINAL_PROJECT" -f docker-compose.yml -f persian.compose.yml config --quiet
    docker compose -p "$ORIGINAL_PROJECT" -f docker-compose.yml -f persian.compose.yml config --images
    docker compose -p "$ORIGINAL_PROJECT" -f docker-compose.yml -f persian.compose.yml pull web worker cron

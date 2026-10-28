@@ -89,6 +89,7 @@ import { WeekdayService } from 'core-app/core/days/weekday.service';
 import { IDay } from 'core-app/core/state/days/day.model';
 import { DayResourceService } from 'core-app/core/state/days/day.service';
 import allLocales from '@fullcalendar/core/locales-all';
+import { calendarPresentation } from 'core-app/core/datetime/calendar-presentation';
 
 export interface CalendarViewEvent {
   el:HTMLElement;
@@ -138,7 +139,7 @@ export class OpWorkPackagesCalendarService extends UntilDestroyedMixin {
   private readonly states = inject(States);
 
   calendarOptions(additionalOptions:CalendarOptions):CalendarOptions {
-    return { ...this.defaultOptions(), ...additionalOptions };
+    return { ...this.defaultOptions(), ...additionalOptions, ...calendarPresentation(this.I18n.locale) };
   }
 
   eventDate(workPackage:WorkPackageResource, type:'start'|'due'):string {

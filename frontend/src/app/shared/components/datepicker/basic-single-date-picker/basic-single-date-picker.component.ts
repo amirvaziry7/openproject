@@ -115,7 +115,7 @@ export class OpBasicSingleDatePickerComponent implements ControlValueAccessor, O
   }
 
   ngOnInit() {
-    this.mobile = this.deviceService.isMobile;
+    this.mobile = this.deviceService.isMobile && this.I18n.locale !== 'fa';
   }
 
   ngAfterViewInit():void {

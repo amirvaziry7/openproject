@@ -45,5 +45,5 @@ fa:
   permission_show_board_views: مشاهده تابلو ها
   plugin_openproject_boards:
     description: نماهای برد را فراهم می‌کند.
-    name: تابلوهای  OpenProject
+    name: تابلوهای  سامانه جامع مدیریت پروژه
   project_module_board_view: بردها

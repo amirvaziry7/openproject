@@ -46,8 +46,11 @@ See COPYRIGHT and LICENSE files for more details.
         <%= render partial: "layouts/language_selector" %>
       </div>
     </header>
-    <main id="content-wrapper">
-      <%= yield %>
+    <main id="content-wrapper" class="op-institution-page">
+      <div class="op-institution-page-content">
+        <%= yield %>
+      </div>
+      <%= render partial: "layouts/institution_footer" %>
     </main>
   </div>
 <% end %>

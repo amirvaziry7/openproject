@@ -146,7 +146,7 @@ export class OpBasicRangeDatePickerComponent implements OnInit, ControlValueAcce
   }
 
   ngOnInit() {
-    this.mobile = this.deviceService.isMobile;
+    this.mobile = this.deviceService.isMobile && this.I18n.locale !== 'fa';
   }
 
   ngAfterViewInit():void {

@@ -25,6 +25,7 @@
 // See COPYRIGHT and LICENSE files for more details.
 //++
 
+import { calendarPresentation } from 'core-app/core/datetime/calendar-presentation';
 import { Controller } from '@hotwired/stimulus';
 import { Calendar } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -88,6 +89,7 @@ export default class NonWorkingTimesController extends Controller {
       multiMonthMaxColumns: 1,
       locales: allLocales,
       locale: this.localeValue,
+      ...calendarPresentation(this.localeValue),
       firstDay: this.startOfWeekValue,
       initialDate: `${this.yearValue}-01-01`,
       headerToolbar: false,

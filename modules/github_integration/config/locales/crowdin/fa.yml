@@ -62,22 +62,22 @@ fa:
   label_github_webhook_secret: رمز Webhook
   notice_deploy_target_created: مقصد استقرار ایجاد شد
   notice_deploy_target_destroyed: مقصد استقرار حذف شد
-  permission_introspection: خواندن نسخه در حال اجرای OpenProject Core و SHA ساخت
+  permission_introspection: خواندن نسخه در حال اجرای سامانه جامع مدیریت پروژه Core و SHA ساخت
   permission_show_github_content: نمایش محتوای GitHub
   plugin_openproject_github_integration:
-    description: OpenProject و GitHub را برای گردش‌کار بهتر یکپارچه می‌کند
-    name: یکپارچه‌سازی OpenProject با GitHub
+    description: سامانه جامع مدیریت پروژه و GitHub را برای گردش‌کار بهتر یکپارچه می‌کند
+    name: یکپارچه‌سازی سامانه جامع مدیریت پروژه با GitHub
   project_module_github: GitHub
-  text_deploy_target_api_key_info: 'یک [کلید API](docs_url) متعلق به کاربری در OpenProject که مجوز سراسری introspection را دارد.
+  text_deploy_target_api_key_info: 'یک [کلید API](docs_url) متعلق به کاربری در سامانه جامع مدیریت پروژه که مجوز سراسری introspection را دارد.
 
     '
-  text_deploy_target_type_info: 'در حال حاضر فقط خود OpenProject پشتیبانی می‌شود.
+  text_deploy_target_type_info: 'در حال حاضر فقط خود سامانه جامع مدیریت پروژه پشتیبانی می‌شود.
 
     '
-  text_github_comment_user_info: 'کاربر OpenProject که کلید API او باید برای احراز هویت درخواست‌های Webhook ورودی استفاده شود. در صورت تنظیم، درخواست‌هایی که با اعتبارنامه کاربر دیگری احراز هویت شوند رد می‌شوند. این کاربر همچنین دیدگاه‌های خودکار وضعیت استقرار را روی بسته‌های کاری ثبت می‌کند. اگر تنظیم نشود، کاربر سیستم به‌صورت پیش‌فرض استفاده می‌شود.
+  text_github_comment_user_info: 'کاربر سامانه جامع مدیریت پروژه که کلید API او باید برای احراز هویت درخواست‌های Webhook ورودی استفاده شود. در صورت تنظیم، درخواست‌هایی که با اعتبارنامه کاربر دیگری احراز هویت شوند رد می‌شوند. این کاربر همچنین دیدگاه‌های خودکار وضعیت استقرار را روی بسته‌های کاری ثبت می‌کند. اگر تنظیم نشود، کاربر سیستم به‌صورت پیش‌فرض استفاده می‌شود.
 
     '
-  text_github_webhook_secret_info: 'توکن محرمانه‌ای که هنگام پیکربندی Webhook با GitHub به اشتراک گذاشته می‌شود. در صورت تنظیم، OpenProject هدر X-Hub-Signature-256 را برای هر درخواست ورودی بررسی می‌کند و payloadهای نامطابق را رد می‌کند. برای ردکردن اعتبارسنجی خالی بگذارید (توصیه نمی‌شود).
+  text_github_webhook_secret_info: 'توکن محرمانه‌ای که هنگام پیکربندی Webhook با GitHub به اشتراک گذاشته می‌شود. در صورت تنظیم، سامانه جامع مدیریت پروژه هدر X-Hub-Signature-256 را برای هر درخواست ورودی بررسی می‌کند و payloadهای نامطابق را رد می‌کند. برای ردکردن اعتبارسنجی خالی بگذارید (توصیه نمی‌شود).
 
     '
   text_github_webhook_secret_missing_warning: 'هیچ رمز Webhook پیکربندی نشده است. هر درخواستی به نقطه پایانی Webhook گیت‌هاب بدون اعتبارسنجی پذیرفته می‌شود و ممکن است به عاملان غیرمجاز اجازه جعل رویدادها را بدهد. تنظیم یک رمز قویاً توصیه می‌شود.

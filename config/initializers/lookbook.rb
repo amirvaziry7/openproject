@@ -38,7 +38,7 @@ Rails.application.configure do
   YARD::Tags::Library.define_tag("Snapshot preview (unused)", :snapshot)
 
   # Branding
-  config.lookbook.project_name = "OpenProject Lookbook"
+  config.lookbook.project_name = Settings::Definition[:software_name].value
   config.lookbook.project_logo = Rails.root.join("app/assets/images/icon_logo_white.svg").read
   config.lookbook.ui_favicon = Rails.root.join("app/assets/images/icon_logo.svg").read
   config.lookbook.ui_theme = "blue"

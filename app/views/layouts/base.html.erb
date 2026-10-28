@@ -139,7 +139,7 @@ See COPYRIGHT and LICENSE files for more details.
     <% end %>
     <div class="content-overlay"
          data-action="click->menus--main-toggle#toggleNavigation"></div>
-    <%= content_tag :main, id: "content-wrapper", class: initial_classes, data: stimulus_content_data do %>
+    <%= content_tag :main, id: "content-wrapper", class: "#{initial_classes} op-institution-page", data: stimulus_content_data do %>
       <% if show_onboarding_modal? %>
         <section data-augmented-model-wrapper
                  data-modal-initialize-now="true"
@@ -187,6 +187,7 @@ See COPYRIGHT and LICENSE files for more details.
           <%= content_for :content_body_right %>
         <% end %>
       <% end %>
+      <%= render partial: "layouts/institution_footer" %>
     <% end %>
   </div>
   <%= render Primer::Beta::Spinner.new(

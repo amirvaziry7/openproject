@@ -10,6 +10,9 @@ x-app: &app
     OPENPROJECT_HTTPS: "false"
     OPENPROJECT_HSTS: "false"
     OPENPROJECT_DEFAULT__LANGUAGE: "fa"
+    OPENPROJECT_APP__TITLE: "سامانه جامع مدیریت پروژه"
+    OPENPROJECT_SOFTWARE__NAME: "سامانه جامع مدیریت پروژه"
+    OPENPROJECT_SEED__ADMIN__USER__NAME: "مدیر سامانه جامع مدیریت پروژه"
     OPENPROJECT_SEED__ADMIN__USER__PASSWORD: "${OPENPROJECT_FA_STAGE_ADMIN_PASSWORD:?Set a staging admin password}"
     OPENPROJECT_SEED__ADMIN__USER__PASSWORD__RESET: "false"
     OPENPROJECT_CACHE__MEMCACHE__SERVER: "cache:11211"
@@ -77,10 +80,52 @@ services:
       DATABASE_URL: "postgres://openproject_fa_stage:${OPENPROJECT_FA_STAGE_DB_PASSWORD:?Set a staging database password}@db/openproject_fa_test?pool=20"
       SECRET_KEY_BASE: "${OPENPROJECT_FA_STAGE_SECRET_KEY_BASE:?Set a staging secret key}"
     volumes:
+      - ../../config/locales:/app/config/locales:ro
+      - ../../modules/auth_saml/config/locales:/app/modules/auth_saml/config/locales:ro
+      - ../../modules/avatars/config/locales:/app/modules/avatars/config/locales:ro
+      - ../../modules/backlogs/config/locales:/app/modules/backlogs/config/locales:ro
+      - ../../modules/bim/config/locales:/app/modules/bim/config/locales:ro
+      - ../../modules/boards/config/locales:/app/modules/boards/config/locales:ro
+      - ../../modules/calendar/config/locales:/app/modules/calendar/config/locales:ro
+      - ../../modules/documents/config/locales:/app/modules/documents/config/locales:ro
+      - ../../modules/github_integration/config/locales:/app/modules/github_integration/config/locales:ro
+      - ../../modules/gitlab_integration/config/locales:/app/modules/gitlab_integration/config/locales:ro
+      - ../../modules/job_status/config/locales:/app/modules/job_status/config/locales:ro
+      - ../../modules/ldap_departments/config/locales:/app/modules/ldap_departments/config/locales:ro
+      - ../../modules/ldap_groups/config/locales:/app/modules/ldap_groups/config/locales:ro
+      - ../../modules/meeting/config/locales:/app/modules/meeting/config/locales:ro
+      - ../../modules/openid_connect/config/locales:/app/modules/openid_connect/config/locales:ro
+      - ../../modules/recaptcha/config/locales:/app/modules/recaptcha/config/locales:ro
+      - ../../modules/reporting/config/locales:/app/modules/reporting/config/locales:ro
+      - ../../modules/resource_management/config/locales:/app/modules/resource_management/config/locales:ro
+      - ../../modules/storages/config/locales:/app/modules/storages/config/locales:ro
+      - ../../modules/team_planner/config/locales:/app/modules/team_planner/config/locales:ro
+      - ../../modules/two_factor_authentication/config/locales:/app/modules/two_factor_authentication/config/locales:ro
+      - ../../modules/webhooks/config/locales:/app/modules/webhooks/config/locales:ro
+      - ../../modules/wikis/config/locales:/app/modules/wikis/config/locales:ro
+      - ../../modules/xls_export/config/locales:/app/modules/xls_export/config/locales:ro
+      - ../../config/constants/settings/definition.rb:/app/config/constants/settings/definition.rb:ro
+      - ../../config/initializers/lookbook.rb:/app/config/initializers/lookbook.rb:ro
+      - ../../app/seeders/oauth_applications_seeder.rb:/app/app/seeders/oauth_applications_seeder.rb:ro
+      - ../../app/workers/backup_job.rb:/app/app/workers/backup_job.rb:ro
+      - ../../app/mailers/interceptors/default_headers.rb:/app/app/mailers/interceptors/default_headers.rb:ro
+      - ../../spec/mailers/interceptors/default_headers_spec.rb:/app/spec/mailers/interceptors/default_headers_spec.rb:ro
+      - ../../spec/models/setting_spec.rb:/app/spec/models/setting_spec.rb:ro
+      - ../../spec/seeders/admin_user_seeder_spec.rb:/app/spec/seeders/admin_user_seeder_spec.rb:ro
+      - ../../app/views/layouts/_institution_footer.html.erb:/app/app/views/layouts/_institution_footer.html.erb:ro
       - ../../app/assets/images:/app/app/assets/images:ro
       - ../../app/views/account/login.html.erb:/app/app/views/account/login.html.erb:ro
       - ../../app/views/common/_favicons.html.erb:/app/app/views/common/_favicons.html.erb:ro
       - ../../lib/open_project/custom_styles/design.rb:/app/lib/open_project/custom_styles/design.rb:ro
+      - ../../lib_static/redmine/i18n.rb:/app/lib_static/redmine/i18n.rb:ro
+      - ../../lib/open_project/internationalization/persian_calendar.rb:/app/lib/open_project/internationalization/persian_calendar.rb:ro
+      - ../../spec/lib/redmine/i18n_spec.rb:/app/spec/lib/redmine/i18n_spec.rb:ro
+      - ../../app/helpers/my/work_helper.rb:/app/app/helpers/my/work_helper.rb:ro
+      - ../../app/components/my/work:/app/app/components/my/work:ro
+      - ../../app/components/users/non_working_times/sidebar_component.rb:/app/app/components/users/non_working_times/sidebar_component.rb:ro
+      - ../../app/components/work_packages/reminder/modal_body_component.rb:/app/app/components/work_packages/reminder/modal_body_component.rb:ro
+      - ../../modules/meeting/app/models/meeting/virtual_start_time.rb:/app/modules/meeting/app/models/meeting/virtual_start_time.rb:ro
+      - ../../modules/meeting/app/components/meetings/side_panel/details_form_component.rb:/app/modules/meeting/app/components/meetings/side_panel/details_form_component.rb:ro
       - ../../app/controllers/application_controller.rb:/app/app/controllers/application_controller.rb:ro
       - ../../app/views/layouts/_language_selector.html.erb:/app/app/views/layouts/_language_selector.html.erb:ro
       - ../../app/views/layouts/only_logo.html.erb:/app/app/views/layouts/only_logo.html.erb:ro

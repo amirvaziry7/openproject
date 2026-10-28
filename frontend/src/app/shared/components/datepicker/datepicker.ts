@@ -39,6 +39,8 @@ import Options = flatpickr.Options;
 import FlatpickrOptions = flatpickr.Options.Options;
 import DateOption = Options.DateOption;
 import { DayResourceService } from 'core-app/core/state/days/day.service';
+import { persianCalendarPlugin } from './persian-calendar.plugin';
+import { formatCalendarDate, parsePersianDate } from 'core-app/core/datetime/persian-calendar';
 
 export class DatePicker {
   private datepickerFormat = 'Y-m-d';
@@ -77,6 +79,22 @@ export class DatePicker {
       });
 
     const mergedOptions = Object.assign({}, this.defaultOptions, options);
+    if (this.I18n.locale === 'fa') {
+      mergedOptions.plugins = [...(options.plugins ?? []), persianCalendarPlugin()];
+      mergedOptions.disableMobile = true;
+      if (!options.altInput && !options.inline) {
+        mergedOptions.altInput = true;
+        mergedOptions.altFormat = 'persian-date';
+        mergedOptions.formatDate = (date, format) => format === 'persian-date'
+          ? formatCalendarDate(moment(date), 'YYYY/MM/DD', 'fa')
+          : moment(date).format('YYYY-MM-DD');
+        mergedOptions.parseDate = (text, format) => {
+          const iso = format === 'persian-date' ? parsePersianDate(text, 'YYYY/MM/DD')?.date : text;
+          const date = moment(iso ?? '', 'YYYY-MM-DD', true);
+          return date.isValid() ? date.toDate() : undefined as unknown as Date;
+        };
+      }
+    }
 
     let datePickerInstances:Instance|Instance[];
     if (this.datepickerTarget) {
@@ -86,6 +104,12 @@ export class DatePicker {
     }
 
     this.datepickerInstance = Array.isArray(datePickerInstances) ? datePickerInstances[0] : datePickerInstances;
+    const { input, altInput } = this.datepickerInstance;
+    if (altInput && !options.altInput) {
+      altInput.dir = 'ltr';
+      altInput.id = input.id;
+      input.id = `${input.id}-value`;
+    }
   }
 
   public async isNonWorkingDay(day:Date):Promise<boolean> {

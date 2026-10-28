@@ -51,8 +51,8 @@ fa:
   notice_developer_strategy_otp: "راهبرد توسعه‌دهنده رمز عبور یک‌بارمصرف زیر را تولید کرد: %{token} (کانال: %{channel})"
   notice_phone_number_format: لطفاً شماره را با قالب +XX XXXXXXXX وارد کنید.
   plugin_openproject_two_factor_authentication:
-    description: "این افزونهٔ OpenProject کاربران را با احراز هویت دومرحله‌ای از طریق رمز عبورٔ یک‌بارمصرف مبتنی بر استاندارد TOTP (مانند Google Authenticator) یا کد ارسال‌شده به تلفن همراه از طریق SMS یا تماس صوتی احراز هویت می‌کند."
-    name: احراز هویت دومرحله‌ای OpenProject
+    description: "این افزونهٔ سامانه جامع مدیریت پروژه کاربران را با احراز هویت دومرحله‌ای از طریق رمز عبورٔ یک‌بارمصرف مبتنی بر استاندارد TOTP (مانند Google Authenticator) یا کد ارسال‌شده به تلفن همراه از طریق SMS یا تماس صوتی احراز هویت می‌کند."
+    name: احراز هویت دومرحله‌ای سامانه جامع مدیریت پروژه
   text_otp_not_receive: روش‌های تأیید دیگر
   text_send_otp_again: "ارسال مجدد رمز عبور یک‌بارمصرف از طریق:"
   two_factor_authentication:

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 #-- copyright
 # OpenProject is an open source project management software.
 # Copyright (C) the OpenProject GmbH
@@ -47,7 +48,7 @@ module Meetings
     private
 
     def start_date_initial_value
-      format_date(@meeting.start_time, format: "%Y-%m-%d")
+      format_date(@meeting.start_time, format: "%Y-%m-%d", calendar: false)
     end
 
     def start_time_initial_value

@@ -93,7 +93,7 @@ fa:
   permission_view_resource_planners_explanation: به کاربران اجازهٔ دسترسی به برنامه‌ریز منابع را می‌دهد. آن‌ها می‌توانند برنامه‌ریز خود را ایجاد و مدیریت و برنامه‌ریزهای عمومی را مشاهده کنند، اما برنامه‌ریزهای خصوصی سایر کاربران را نمی‌بینند.
   plugin_openproject_resource_management:
     description: قابلیت‌های مدیریت منابع و برنامه‌ریزی ظرفیت را فراهم می‌کند.
-    name: مدیریت منابع OpenProject
+    name: مدیریت منابع سامانه جامع مدیریت پروژه
   project_module_resource_management: مدیریت منابع
   resource_management:
     action:

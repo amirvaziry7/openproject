@@ -79,7 +79,7 @@ module Redmine
     #   If provided, will output the time zone identifier
     # @param format [String, nil] The strftime format to use for the date. If nil, the default
     #   date format from `Setting.date_format` is used.
-    def format_date(date_or_time, time_zone: nil, format: Setting.date_format)
+    def format_date(date_or_time, time_zone: nil, format: Setting.date_format, calendar: true)
       return nil unless date_or_time
 
       local =
@@ -91,7 +91,15 @@ module Redmine
           in_user_zone(date_or_time).to_date
         end
 
-      format.present? ? ::I18n.l(local, format:) : ::I18n.l(local)
+      format_calendar_date(local, format: format.presence || :default, calendar:)
+    end
+
+    def format_calendar_date(date, format: :default, calendar: true)
+      if calendar && ::I18n.locale == :fa
+        OpenProject::Internationalization::PersianCalendar.localize(date, format:)
+      else
+        ::I18n.l(date, format:)
+      end
     end
 
     # Formats the given date pair as an HTML date range with each date

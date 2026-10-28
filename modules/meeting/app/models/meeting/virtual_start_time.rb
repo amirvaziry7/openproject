@@ -118,7 +118,7 @@ module Meeting::VirtualStartTime
   end
 
   def update_derived_fields
-    @start_date = format_date(start_time, time_zone:, format: "%Y-%m-%d")
+    @start_date = format_date(start_time, time_zone:, format: "%Y-%m-%d", calendar: false)
     @start_time_hour = format_time(start_time, time_zone:, include_date: false, format: "%H:%M")
   end
 

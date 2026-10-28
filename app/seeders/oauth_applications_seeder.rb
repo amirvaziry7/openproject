@@ -53,7 +53,7 @@ class OAuthApplicationsSeeder < Seeder
       .new(user: User.system)
       .call(
         enabled: false,
-        name: "OpenProject Mobile App",
+        name: I18n.t(:label_mobile_application, app_title: Setting.app_title),
         redirect_uri: "openprojectapp://oauth-callback",
         builtin: true,
         confidential: false,

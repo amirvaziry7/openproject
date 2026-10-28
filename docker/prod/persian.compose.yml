@@ -2,6 +2,9 @@ x-persian-app: &persian-app
   image: "${OPENPROJECT_FA_IMAGE:?Set OPENPROJECT_FA_IMAGE to the custom image tag or digest}"
   environment:
     OPENPROJECT_DEFAULT__LANGUAGE: "fa"
+    OPENPROJECT_APP__TITLE: "سامانه جامع مدیریت پروژه"
+    OPENPROJECT_SOFTWARE__NAME: "سامانه جامع مدیریت پروژه"
+    OPENPROJECT_SEED__ADMIN__USER__NAME: "مدیر سامانه جامع مدیریت پروژه"
 
 services:
   web:

@@ -25,6 +25,7 @@
 // See COPYRIGHT and LICENSE files for more details.
 //++
 
+import { calendarPresentation } from 'core-app/core/datetime/calendar-presentation';
 import { ActionEvent, Controller } from '@hotwired/stimulus';
 import { Calendar, EventApi, EventContentArg, EventInput } from '@fullcalendar/core';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -150,6 +151,7 @@ export default class MyWorkController extends Controller {
       initialView: this.calendarView(),
       locales: allLocales,
       locale: this.localeValue,
+      ...calendarPresentation(this.localeValue),
       timeZone: this.timeZoneValue,
       events: [...this.timeEntriesValue, ...this.allocationEvents()],
       headerToolbar: false,

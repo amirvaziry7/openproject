@@ -142,7 +142,7 @@ class BackupJob < ApplicationJob
 
       call = Attachments::CreateService
         .bypass_allowlist(user:)
-        .call(container: backup, filename: file_name, file:, description: "OpenProject backup")
+        .call(container: backup, filename: file_name, file:, description: "#{Setting.software_name} #{I18n.t(:label_backup)}")
 
       call.on_success { upsert_success_status! call.result }
 

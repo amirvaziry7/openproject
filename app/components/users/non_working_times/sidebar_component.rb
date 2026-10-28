@@ -77,7 +77,9 @@ module Users
       end
 
       def format_date_range(first, last)
-        if first.year == last.year
+        if I18n.locale == :fa
+          "#{helpers.format_calendar_date(first, format: :long)} - #{helpers.format_calendar_date(last, format: :long)}"
+        elsif first.year == last.year
           "#{I18n.l(first, format: :short)} - #{I18n.l(last, format: :short)}, #{first.year}"
         else
           "#{I18n.l(first, format: :long)} - #{I18n.l(last, format: :long)}"

@@ -1,5 +1,173 @@
 # Persian localization validation — 2026-10-14
 
+## Pre-commit review — 2026-10-28
+
+The combined institutional branding/footer and Persian calendar changes were
+reviewed again before committing:
+
+- **613 RSpec examples, 0 failures**, covering localization, settings, admin
+  seeding, backup jobs, Unicode mail headers, date helpers, My work headers,
+  reminder forms and meeting models, using the separate test database.
+- **38 frontend tests, 0 failures**; application/spec typechecks passed.
+- **32 browser checks passed**: 19 institutional-name/footer checks and 13
+  Persian/English calendar checks against the healthy local `.17` image.
+  An expired saved browser session was renewed through normal staging login
+  before repeating the browser checks successfully.
+- Translation audit in the running image: **10,517 leaves, 0 errors**.
+- Eight focused TypeScript files passed ESLint; six templates passed ERB lint.
+  All 22 staged Ruby files were inspected: **0 findings on changed lines**;
+  13 pre-existing findings outside changed lines remain. This is not a claim
+  that whole-repository linting or the complete application test suite passed.
+- Both Python build/staging helpers passed syntax compilation. Generated
+  bytecode was removed. Git whitespace validation passed, and credentials,
+  browser sessions, private keys and temporary artifacts were excluded.
+- All **106 staged implementation/build/license files** matched the normalized
+  source manifest used for the validated `.17` image; only tests and
+  documentation were excluded from that implementation comparison.
+
+Only local Docker services were started for verification. Production was not
+accessed and no image or commit was published.
+
+## Persian calendar — 2026-10-27
+
+Candidate: `ghcr.io/amirvaziry7/openproject:18.0.0-fa.17-a76b3e10c81`.
+
+Persian sessions use Jalali display dates and a real Jalali month grid in the
+shared date picker. Date and datetime inputs convert the selected day back to
+Gregorian ISO values. English remains Gregorian. Gantt labels and visual month,
+quarter and year boundaries use the selected calendar. FullCalendar labels are
+localized, while its existing planning-view intervals remain Gregorian.
+
+Executed checks:
+
+- **484 Rails examples, 0 failures**: date localization, My work header,
+  reminder form and meeting model tests, against the separate test database.
+- **38 frontend examples, 0 failures**, in installed headless Chrome:
+  Nowruz, leap-year Esfand, valid/invalid month lengths, Persian/Arabic digits,
+  time-zone day boundaries, datetime round trips, shared picker integration,
+  range selection, disabled/min/max days, English and unchanged ISO output.
+- **27,420 cross-runtime conversion comparisons passed**, sampling five days
+  in each month from Gregorian 1800 through 2256 against jalaali-js.
+- Application/spec typechecks passed. New calendar TypeScript files and eight
+  changed Ruby presentation files passed focused linting. Whole-file linting of
+  older touched files also reports existing issues (including `any` types,
+  empty callbacks, legacy delegation and `Date.today`); it is not reported as a
+  clean whole-repository lint run.
+- Translation audit: **10,517 source leaves, 0 errors**.
+
+An initial component run found five failures caused by a helper not being
+included in My work components. The helper inclusion was corrected; the final
+combined Rails run passed. An initial frontend browser invocation used the
+unsupported `ChromeHeadless` name. The successful run used `chromium`, headless
+mode and the supported `CHROME_BIN` executable override.
+
+The full repository Docker build completed successfully, and isolated staging
+web/worker containers run the `.17` image with a healthy web health check.
+The image ID is
+`sha256:0965a1c0b7734b76903d5f5387a61c9a3be33c6be2f04ea69b4287610627d388`.
+The normalized source manifest SHA256 is
+`ecf8eff97e3aea5a6cd55f4a7f0be14724507f4e407db454268837a862178e1f`.
+Nine calendar runtime files matched the recorded source hashes. The audit
+inside the running image also passed with 10,517 leaves and zero errors.
+
+**13 browser checks passed against the final image**, without script/style
+injection or disabling CSP. They covered Persian/English server and frontend
+dates, real Persian month grids, ISO form values, Persian digit typing, preview
+re-rendering, unchanged persisted dates after cancelling previews, Gantt labels,
+and mobile layout (including a 320px viewport and an Android user agent).
+The private local evidence is in `tmp/persian-validation/calendar-results.json`,
+`fa-jalali-datepicker.png`, `fa-jalali-mobile-datepicker.png`,
+`fa-jalali-gantt.png` and `en-gregorian-datepicker.png`.
+
+An earlier image check exposed Turbo previews removing the visible Persian
+inputs while retaining the calendar component. A scoped observer now restores
+the input adapters after form changes; a regression test covers input morphing
+and replacement. Visual review also led to bounded month-panel widths so two
+months fit the desktop dialog and one month fits narrow mobile screens.
+Diagnostic injection was used to investigate these issues; it was not used in
+the final image verification. No seeder or migrations ran during this rollout.
+No production database or production volumes were accessed. No image was
+published and no commits were pushed.
+
+Reproduction commands (from the repository root, PowerShell):
+
+```powershell
+docker compose --env-file tmp/persian-staging.env -f docker/prod/persian.staging.compose.yml run --rm rails-tests bundle exec rspec spec/lib/redmine/i18n_spec.rb spec/components/my/work/sub_header_component_spec.rb spec/components/work_packages/reminder/modal_body_component_spec.rb modules/meeting/spec/models/meeting_spec.rb --format progress
+cd frontend
+$env:CHROME_BIN='C:\Program Files\Google\Chrome\Application\chrome.exe'
+npm test -- --include=src/app/core/datetime/*.spec.ts --include=src/app/shared/components/datepicker/persian-calendar.plugin.spec.ts --include=src/app/core/setup/init-locale.spec.ts --browsers=chromium --headless
+npm run typecheck
+```
+
+## Full institutional application name — 2026-10-27
+
+The candidate is `ghcr.io/amirvaziry7/openproject:18.0.0-fa.12-a76b3e10c81`.
+The full application name is «سامانه جامع مدیریت پروژه» in the English/Persian
+interfaces. The changes cover application/software title defaults, 512 display
+values in 52 catalogs, nine values in the canonical standard/BIM seed sources,
+stock admin/mobile-client display names, backup descriptions, mail metadata,
+Lookbook branding and the standalone emergency error page. YAML structure,
+interpolation, markup, URLs, code examples and copyright comments were preserved.
+
+Focused settings/localization/seeder/backup tests passed **128 examples,
+0 failures**. The separate Unicode mail-header encoding test passed **1 example,
+0 failures**. Modified Ruby and ERB checks passed with the existing
+`BackupJob#dump_database!` predicate-name warning excluded. The locale audit
+passed with **10,516 leaves, 0 errors**.
+
+Only isolated staging presentation settings and unchanged stock display names
+were updated. Backups are in ignored `tmp/institutional-branding-before.json`
+and `tmp/institutional-oauth-display-before.json`. Mobile-client authentication
+fields were checked to remain unchanged. No production database was accessed.
+
+The `.11` repository-supported production build succeeded. The final `.12`
+layer copies only the updated canonical seed definitions using
+`docker/prod/persian.seed-overrides.Dockerfile`; a clean full build from the
+current source is also supported. **115 runtime branding source files** were
+verified against the normalized build manifest, and the baked locale audit
+also passed. Final image ID:
+`sha256:b2039cd16a93ae3678ff0533f11e8268671a376468733c3327a413cc67f27cdc`.
+Source manifest SHA256:
+`3c5af46973251963659287a112bc66e01fc091fd9786e2e0f24825c763df155c`.
+
+Chrome passed **19 display-name checks** in English/Persian across login, home,
+projects, work packages, administration, general settings, users and error pages,
+including mobile login and the emergency document. Checks verified the full
+page title, global-search label, exported JavaScript backup title, retained
+institutional footer and absence of unprotected visible old application names.
+The emergency document's image and accessible name were also verified. Results
+and inspected screenshots are in ignored `tmp/persian-validation/institution-name-*`.
+
+## Institutional footer — 2026-10-27
+
+The footer candidate is `ghcr.io/amirvaziry7/openproject:18.0.0-fa.9-a76b3e10c81`.
+The shared application and logo-only layouts render the exact requested Persian
+institutional credit in both interface languages. The footer has explicit
+Persian language, RTL direction and Vazir font styling. The content wrapper
+reserves a separate grid row for it rather than overlaying page content.
+
+The focused localization/service tests passed **22 examples, 0 failures**.
+All three changed ERB templates passed lint; the feature spec passed RuboCop.
+The translation audit checked 10,515 source leaves with zero errors. The
+additional source leaf is the institutional footer key, whose Persian text is
+intentionally identical in the English and Persian resources.
+Source manifest SHA256:
+`49c01088886c72db37cbe81f86c9ae1c9fcd714e2218368f0db01d92d9aa97e9`.
+The production Docker build completed successfully. The base-image layers had
+changed since the previous build and required dependency installation again.
+The baked translation audit also passed with 10,515 leaves and zero errors;
+runtime Ruby reports 4.0.7. Local image ID:
+`sha256:0bcb009d7f51bba45c00ddb6c9381ecb749c11f6792aa3456e699137b5a8e03d`.
+Only local staging application containers were recreated, retaining its database
+and volumes. No production connection, image push or Git push occurred.
+
+Chrome completed **17 footer checks** across Persian/English desktop login,
+projects, work packages, administration, users and error pages, plus mobile login
+in both languages and mobile projects/work packages/administration. Each check
+verified the exact Persian text, a single footer, Persian/RTL attributes, Vazir
+font selection, viewport fit and no overlap with the content area. Results and
+screenshots are saved in ignored `tmp/persian-validation/institution-footer-*`.
+
 ## Institutional logo
 
 The branded candidate is `ghcr.io/amirvaziry7/openproject:18.0.0-fa.8-e56ccd23c5c`.

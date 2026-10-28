@@ -30,6 +30,8 @@
 
 module My
   module WorkHelper
+    include Redmine::I18n
+
     def week_date_range(date)
       date_range(week_days(date).first, week_days(date).last)
     end
@@ -56,12 +58,19 @@ module My
     end
 
     def date_range(from, to)
+      from_format, to_format = date_range_formats(from, to)
+      [format_calendar_date(from, format: from_format), format_calendar_date(to, format: to_format)].join(" - ")
+    end
+
+    def date_range_formats(from, to)
+      return %i[long long] if I18n.locale == :fa
+
       if from.year == to.year && from.month == to.month
-        [I18n.l(from, format: "%d."), I18n.l(to, format: "%d. %B %Y")].join(" - ")
+        ["%d.", "%d. %B %Y"]
       elsif from.year == to.year
-        [I18n.l(from, format: "%d. %B"), I18n.l(to, format: "%d. %B %Y")].join(" - ")
+        ["%d. %B", "%d. %B %Y"]
       else
-        [I18n.l(from, format: "%d. %B %Y"), I18n.l(to, format: "%d. %B %Y")].join(" - ")
+        ["%d. %B %Y", "%d. %B %Y"]
       end
     end
   end

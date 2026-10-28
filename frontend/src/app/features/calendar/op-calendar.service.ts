@@ -34,6 +34,7 @@ import { IDay } from 'core-app/core/state/days/day.model';
 import moment from 'moment-timezone';
 import { ConfigurationService } from 'core-app/core/config/configuration.service';
 import { DayHeaderContentArg } from '@fullcalendar/core';
+import { formatCalendarDate } from 'core-app/core/datetime/persian-calendar';
 
 @Injectable()
 export class OpCalendarService extends UntilDestroyedMixin {
@@ -84,7 +85,7 @@ export class OpCalendarService extends UntilDestroyedMixin {
     const formatWithoutYear = this.stripYearFromDateFormat(configuredDateFormat);
     const utcDate = moment(event.date).utc();
 
-    return utcDate.format(`ddd ${formatWithoutYear}`);
+    return formatCalendarDate(utcDate, `ddd ${formatWithoutYear}`, window.I18n.locale);
   }
 
   stripYearFromDateFormat(format:string):string {

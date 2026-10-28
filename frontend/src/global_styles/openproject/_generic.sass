@@ -217,3 +217,36 @@ html[lang="fa"][dir="rtl"]
   max-width: 100%
   object-fit: contain
   margin: 0 auto 1rem
+
+.op-institution-page
+  display: grid
+  grid-template-columns: minmax(0, 1fr)
+  grid-template-rows: minmax(0, 1fr) auto
+
+  > :not(.op-institution-footer)
+    grid-area: 1 / 1
+
+  > .op-institution-footer
+    grid-area: 2 / 1
+
+.op-institution-page-content
+  min-height: 0
+  overflow: auto
+
+.op-institution-footer
+  display: flex
+  align-items: center
+  justify-content: center
+  padding: 0.5rem 1rem
+  border-top: 1px solid var(--borderColor-default)
+  background-color: var(--body-background)
+  color: var(--fgColor-muted)
+  font-family: "Vazir", var(--body-font-family)
+  font-size: 0.75rem
+  line-height: 1.75
+  text-align: center
+  overflow-wrap: anywhere
+
+@media print
+  .op-institution-page
+    display: block !important

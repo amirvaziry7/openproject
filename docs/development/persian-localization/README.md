@@ -151,12 +151,45 @@ favicon SVG assets embed the same PNG without redrawing or changing its text.
 The login page displays the full portrait logo at 180px high with its original
 proportions; the header scales it to fit its existing logo area.
 
+Application and logo-only pages display the institutional footer using the
+`institutional_footer` translation key. The requested Persian text is identical
+in both interface languages, with explicit Persian language, RTL direction and
+Vazir styling. The content area reserves a separate grid row for the footer so
+it stays below forms and tables without covering them.
+
+The application display name is «سامانه جامع مدیریت پروژه» in both supported
+interface languages. The default application/software title, default admin
+display name, translated core/module messages, backup descriptions, built-in
+mobile-client display name and mailer metadata use this branding. The Compose
+overrides set `OPENPROJECT_APP__TITLE` and `OPENPROJECT_SOFTWARE__NAME` explicitly.
+Ruby/JavaScript namespaces, API/header identifiers, URLs, code examples and
+upstream copyright notices retain their technical/original names.
+
+For the isolated staging instance, only the five presentation settings
+`app_title`, `software_name`, `welcome_title`, `welcome_text`, `consent_info` and
+the unchanged stock admin display name were updated. Their earlier values are
+backed up in ignored `tmp/institutional-branding-before.json`. Existing content
+and production databases are not bulk-renamed. On production, review persisted
+welcome/consent text through administration when applying the new image.
+
 Application, login and HTML email layouts now use the existing `direction`
 translation (`rtl` in Persian, `ltr` in English). The Persian-only Sass rule
 keeps code, email/URL/telephone/numeric/password inputs and the Gantt timeline
-LTR. Form labels use logical alignment. FullCalendar already loads its Persian
-locale; no calendar behavior or date arithmetic has changed. Gregorian dates
-and existing numeric formatting are retained; no Jalali conversion is added.
+LTR. Form labels use logical alignment. Persian sessions display Jalali dates in the shared Rails and frontend date
+formatters. English sessions retain Gregorian dates. The shared date picker
+renders actual Persian months, including leap-year Esfand and Nowruz; desktop
+and mobile Persian date inputs accept Jalali dates and Persian/Arabic digits.
+Gantt month/quarter/year labels and their visual boundaries use the Persian
+calendar. FullCalendar date labels use Jalali dates; its planning view ranges
+and navigation retain their existing Gregorian intervals.
+
+Storage, API values, HTML datetime attributes, scheduling calculations and
+calendar event timestamps remain Gregorian ISO values. Formatted datetime
+inputs convert from Jalali into the user's time zone before serialization.
+Existing server-side ISO form values opt out of display conversion with
+`calendar: false`. Do not change Moment's global calendar or localize machine
+values. The conversion uses jalaali-js 2.0.1 and a matching Ruby year-boundary
+implementation; the MIT attribution is in `doc/licenses/jalaali-js.txt`.
 
 Before release, check desktop and mobile navigation, project/work-package
 tables, scrolling, sorting, drag-and-drop, resizers, dialogs, forms, both rich

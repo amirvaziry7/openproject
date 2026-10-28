@@ -107,7 +107,7 @@ fa:
       tenant_html: در صورت نیاز، tenant پیش‌فرض را با tenant خود جایگزین کنید. <a href=" https://learn.microsoft.com/en-us/entra/identity-platform/v2-protocols-oidc#find-your-apps-openid-configuration-document-uri">اینجا</a> را ببینید.
     menu_title: ارائه‌دهندگان OpenID
     providers:
-      client_details_description: جزئیات پیکربندی OpenProject به‌عنوان کلاینت OIDC
+      client_details_description: جزئیات پیکربندی سامانه جامع مدیریت پروژه به‌عنوان کلاینت OIDC
       custom:
         name: سفارشی
       google:
@@ -131,12 +131,12 @@ fa:
       notice_created: ارائه‌دهنده OpenID جدید با موفقیت ایجاد شد.
       plural: ارائه‌دهندگان OpenID
       section_texts:
-        attribute_mapping: نگاشت ویژگی‌ها بین OpenProject و ارائه‌دهنده OpenID Connect را پیکربندی کنید.
+        attribute_mapping: نگاشت ویژگی‌ها بین سامانه جامع مدیریت پروژه و ارائه‌دهنده OpenID Connect را پیکربندی کنید.
         claims: Claimهای بیشتری برای ID token یا پاسخ userinfo درخواست کنید.
         configuration: جزئیات پیکربندی ارائه‌دهنده OpenID Connect
         configuration_metadata: اطلاعات با استفاده از نقطه پایانی Discovery ارائه‌شده از پیش پر شده‌اند و در بیشتر موارد نیازی به ویرایش ندارند.
         display_name: نام نمایشی قابل مشاهده برای کاربران.
-        group_mapping: نام گروه‌های ارائه‌شده توسط ارائه‌دهنده هویت را به گروه‌های OpenProject نگاشت کنید.
+        group_mapping: نام گروه‌های ارائه‌شده توسط ارائه‌دهنده هویت را به گروه‌های سامانه جامع مدیریت پروژه نگاشت کنید.
         metadata: پیکربندی را با استفاده از نشانی نقطه پایانی Discovery مربوط به OpenID Connect از پیش پر کنید
         metadata_form_banner: ویرایش نقطه پایانی Discovery ممکن است مقادیر فراداده از پیش پرشده را بازنویسی کند.
         metadata_form_description: اگر ارائه‌دهنده هویت شما نقطه پایانی Discovery دارد، از آن در زیر برای تکمیل خودکار پیکربندی استفاده کنید.
@@ -146,7 +146,7 @@ fa:
           backchannel_logout_url: نشانی خروج Backchannel
       singular: ارائه‌دهنده OpenID
       upsell:
-        description: اتصال OpenProject به یک ارائه‌دهنده هویت OpenID Connect
+        description: اتصال سامانه جامع مدیریت پروژه به یک ارائه‌دهنده هویت OpenID Connect
         title: ورود یکپارچه (SSO) با OpenID Connect
     setting_instructions:
       limit_self_registration: 'اگر فعال باشد، کاربران فقط زمانی می‌توانند با این ارائه‌دهنده ثبت‌نام کنند که تنظیم ثبت‌نام شخصی اجازه دهد.
@@ -157,8 +157,8 @@ fa:
       metadata_none: این اطلاعات را ندارم
       metadata_url: نشانی نقطه پایانی Discovery را دارم
   plugin_openproject_openid_connect:
-    description: Strategyهای OmniAuth OpenID Connect را به OpenProject اضافه می‌کند.
-    name: OpenProject OpenID Connect
+    description: Strategyهای OmniAuth OpenID Connect را به سامانه جامع مدیریت پروژه اضافه می‌کند.
+    name: سامانه جامع مدیریت پروژه OpenID Connect
   provider:
     delete_warning:
       delete_result_1: ارائه‌دهنده را از فهرست ارائه‌دهندگان در دسترس حذف کنید.

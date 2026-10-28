@@ -38,7 +38,7 @@ describe('TimezoneService', () => {
   const DATE = '2013-02-08';
   let timezoneService:TimezoneService;
 
-  const compile = (timezone?:string, formats:{ date?:string, time?:string } = {}) => {
+  const compile = (timezone?:string, formats:{ date?:string, time?:string } = {}, locale = 'en') => {
     const ConfigurationServiceStub = {
       isTimezoneSet: () => !!timezone,
       timezone: () => timezone,
@@ -55,7 +55,7 @@ describe('TimezoneService', () => {
     TestBed.configureTestingModule({
       imports: [],
       providers: [
-        { provide: I18nService, useValue: {} },
+        { provide: I18nService, useValue: { locale } },
         { provide: ConfigurationService, useValue: ConfigurationServiceStub },
         PathHelperService,
         TimezoneService,
@@ -140,6 +140,27 @@ describe('TimezoneService', () => {
       compile('Europe/Berlin');
 
       expect(timezoneService.uses24HourClock()).toBe(!/[aA]/.test(moment.localeData().longDateFormat('LT')));
+    });
+  });
+
+  describe('Persian dates in the user time zone', () => {
+    beforeEach(() => compile('Asia/Tehran', { date: 'YYYY/MM/DD', time: 'HH:mm' }, 'fa'));
+
+    it('converts the local day after applying the time zone', () => {
+      expect(timezoneService.formattedDatetime('2025-03-20T21:00:00Z')).toBe('1404/01/01 00:30');
+      expect(timezoneService.formattedDatetime('2025-03-20T20:00:00Z')).toBe('1403/12/30 23:30');
+    });
+
+    it('round-trips a Persian datetime to the same Gregorian instant', () => {
+      expect(timezoneService.parseFormattedDatetime('۱۴۰۴/۰۱/۰۱ ۰۰:۳۰')).toBe('2025-03-20T21:00:00Z');
+      expect(timezoneService.parseFormattedDatetime('1404/12/30 00:30')).toBeNull();
+    });
+
+    it('keeps canonical date parsing, validation and output Gregorian', () => {
+      expect(timezoneService.formattedDate('2026-10-27')).toBe('1405/08/05');
+      expect(timezoneService.formattedISODate('2026-10-27')).toBe('2026-10-27');
+      expect(timezoneService.isValidISODate('2026-02-30')).toBe(false);
+      expect(timezoneService.parseISODate('2026-10-27').year()).toBe(2026);
     });
   });
 });

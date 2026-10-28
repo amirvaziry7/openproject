@@ -88,7 +88,7 @@ module Settings
         default: false
       },
       app_title: {
-        default: "OpenProject"
+        default: "سامانه جامع مدیریت پروژه"
       },
       organization_name: {
         default: "My Organization"
@@ -1160,7 +1160,7 @@ module Settings
       },
       seed_admin_user_name: {
         description: "Name to set for the initially created admin user.",
-        default: "OpenProject Admin",
+        default: "مدیر سامانه جامع مدیریت پروژه",
         writable: false
       },
       seed_admin_user_password_reset: {
@@ -1303,7 +1303,7 @@ module Settings
       },
       software_name: {
         description: "Override software application name",
-        default: "OpenProject"
+        default: "سامانه جامع مدیریت پروژه"
       },
       software_url: {
         description: "Override software application URL",

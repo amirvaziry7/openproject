@@ -105,7 +105,7 @@ fa:
   permission_save_private_cost_reports: ذخیره گزارش‌های هزینه خصوصی
   plugin_openproject_reporting:
     description: این افزونه به شما امکان ایجاد گزارش‌های سفارشی هزینه با فیلتر کردن و گروه‌بندی ایجاد شده توسط افزونه زمان و هزینه اوپن‌پروژه را می‌دهد.
-    name: گزارش OpenProject
+    name: گزارش سامانه جامع مدیریت پروژه
   reporting:
     group_by:
       selected_columns: ستون‌های انتخاب‌شده

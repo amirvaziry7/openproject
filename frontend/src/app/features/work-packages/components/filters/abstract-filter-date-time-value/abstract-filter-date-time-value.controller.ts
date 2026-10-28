@@ -25,6 +25,7 @@
 // See COPYRIGHT and LICENSE files for more details.
 //++
 
+import { formatCalendarDate } from 'core-app/core/datetime/persian-calendar';
 import { Moment } from 'moment';
 import { I18nService } from 'core-app/core/i18n/i18n.service';
 import { OnInit, Directive, inject } from '@angular/core';
@@ -77,19 +78,19 @@ export abstract class AbstractDateTimeValueController extends UntilDestroyedMixi
       return this.I18n.t(
  'js.filter.time_zone_converted.two_values',
         {
-          from: this.lowerBoundary.format('YYYY-MM-DD HH:mm'),
-          to: this.upperBoundary.format('YYYY-MM-DD HH:mm'),
+          from: formatCalendarDate(this.lowerBoundary, 'YYYY-MM-DD HH:mm', this.I18n.locale),
+          to: formatCalendarDate(this.upperBoundary, 'YYYY-MM-DD HH:mm', this.I18n.locale),
         },
 );
     } if (this.upperBoundary) {
       return this.I18n.t(
  'js.filter.time_zone_converted.only_end',
-        { to: this.upperBoundary.format('YYYY-MM-DD HH:mm') },
+        { to: formatCalendarDate(this.upperBoundary, 'YYYY-MM-DD HH:mm', this.I18n.locale) },
 );
     } if (this.lowerBoundary) {
       return this.I18n.t(
 'js.filter.time_zone_converted.only_start',
-        { from: this.lowerBoundary.format('YYYY-MM-DD HH:mm') },
+        { from: formatCalendarDate(this.lowerBoundary, 'YYYY-MM-DD HH:mm', this.I18n.locale) },
 );
     }
 

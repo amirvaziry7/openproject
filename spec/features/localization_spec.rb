@@ -79,6 +79,32 @@ RSpec.describe "Localization", with_settings: { login_required?: false,
       expect(page).to have_css('link[rel="icon"][type="image/svg+xml"][href*="icon_logo"]', visible: :all)
     end
 
+    it "shows the Persian institutional footer in both interface languages" do
+      text = "تهیه شده در مرکز علوم نوین پدافندی دانشکده و پژوهشکده پدافند غیرعامل دانشگاه جامع امام حسین (ع)"
+      visit signin_path
+
+      expect(page).to have_css('footer.op-institution-footer[lang="fa"][dir="rtl"]', exact_text: text, count: 1)
+
+      visit signin_path(ui_language: "en")
+      expect(page).to have_css('html[lang="en"]', visible: :all)
+      expect(page).to have_css("footer.op-institution-footer", exact_text: text, count: 1)
+
+      visit projects_path
+      expect(page).to have_css("footer.op-institution-footer", exact_text: text, count: 1)
+    end
+
+    it "uses the full institutional application name in both interface languages" do
+      title = "سامانه جامع مدیریت پروژه"
+
+      %w[fa en].each do |language|
+        visit signin_path(ui_language: language)
+
+        expect(page).to have_title(title)
+        expect(OpenProject::Info.app_name).to eq(title)
+        expect(page).to have_no_text("OpenProject")
+      end
+    end
+
     it "preserves an explicit English user preference" do
       user = create(:user, language: "en")
       login_as(user)

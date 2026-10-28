@@ -30,6 +30,7 @@ import { ConfigurationService } from 'core-app/core/config/configuration.service
 import { I18nService } from 'core-app/core/i18n/i18n.service';
 import moment, { Moment } from 'moment-timezone';
 import { outputChronicDuration } from '../../shared/helpers/chronic_duration';
+import { formatCalendarDate, parsePersianDate } from './persian-calendar';
 
 @Injectable({ providedIn: 'root' })
 export class TimezoneService {
@@ -76,7 +77,7 @@ export class TimezoneService {
 
   public formattedDate(date:string, format = this.getDateFormat()):string {
     const d = this.parseDate(date);
-    return d.format(format);
+    return formatCalendarDate(d, format, this.I18n.locale);
   }
 
   /**
@@ -108,7 +109,7 @@ export class TimezoneService {
   public formattedDatetimeComponents(datetimeString:string):string[] {
     const d = this.parseDatetime(datetimeString);
     return [
-      d.format(this.getDateFormat()),
+      formatCalendarDate(d, this.getDateFormat(), this.I18n.locale),
       d.format(this.getTimeFormat()),
     ];
   }
@@ -205,8 +206,14 @@ export class TimezoneService {
    * as moment tokens (see API::V3::Configuration::ConfigurationRepresenter#date_format).
    */
   public parseFormattedDatetime(text:string):string|null {
-    const format = `${this.getDateFormat()} ${this.getTimeFormat()}`;
-    const parsed = moment.tz(text, format, true, this.userTimezone());
+    let dateFormat = this.getDateFormat();
+    if (this.I18n.locale === 'fa') {
+      const parts = parsePersianDate(text, dateFormat, true);
+      if (!parts) return null;
+      text = `${parts.date} ${parts.time}`;
+      dateFormat = 'YYYY-MM-DD';
+    }
+    const parsed = moment.tz(text, `${dateFormat} ${this.getTimeFormat()}`, true, this.userTimezone());
 
     return parsed.isValid() ? parsed.utc().format() : null;
   }

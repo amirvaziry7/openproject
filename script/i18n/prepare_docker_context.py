@@ -11,6 +11,18 @@ import tarfile
 
 
 EXTRA_PATHS = [
+    "frontend/src/app/core/datetime/calendar-presentation.spec.ts",
+    "frontend/src/app/core/datetime/calendar-presentation.ts",
+    "lib/open_project/internationalization/persian_calendar.rb",
+    "doc/licenses/jalaali-js.txt",
+    "frontend/src/app/core/datetime/persian-calendar.ts",
+    "frontend/src/app/core/datetime/persian-calendar.spec.ts",
+    "frontend/src/app/shared/components/datepicker/persian-calendar.plugin.ts",
+    "frontend/src/app/shared/components/datepicker/persian-calendar.plugin.spec.ts",
+    "frontend/src/app/shared/components/datepicker/persian-date-input.ts",
+    "docker/prod/persian.seed-overrides.Dockerfile",
+    "spec/mailers/interceptors/default_headers_spec.rb",
+    "app/views/layouts/_institution_footer.html.erb",
     "app/assets/images/university_logo.png",
     "public/favicon.svg",
     "frontend/src/assets/fonts/vazir/Vazir-Regular.woff2",
@@ -75,7 +87,7 @@ def refresh_snapshot(archive, manifest_path, root):
 
 def build(archive, root, args):
     command = ["docker", "build", "--progress=plain", "--target", args.target,
-               "-f", "docker/prod/Dockerfile", "-t", args.tag, "-"]
+               "-f", args.dockerfile, "-t", args.tag, "-"]
     print("Building " + args.tag, flush=True)
     with archive.open("rb") as context, (archive.parent / "build.log").open("w", encoding="utf-8") as log:
         process = subprocess.Popen(command, stdin=context, cwd=root, stdout=subprocess.PIPE,
@@ -95,7 +107,8 @@ def main():
     parser.add_argument("--reuse", action="store_true", help="Build the previously recorded snapshot")
     parser.add_argument("--refresh", action="store_true", help="Update the snapshot from changed tracked files and the explicit extras")
     parser.add_argument("--target", default="slim")
-    parser.add_argument("--tag", default="ghcr.io/amirvaziry7/openproject:18.0.0-fa.8-e56ccd23c5c")
+    parser.add_argument("--dockerfile", default="docker/prod/Dockerfile")
+    parser.add_argument("--tag", default="ghcr.io/amirvaziry7/openproject:18.0.0-fa.17-a76b3e10c81")
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[2]
     output = root / "tmp" / "persian-build"

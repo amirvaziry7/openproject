@@ -6,7 +6,7 @@ import secrets
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--image", default="ghcr.io/amirvaziry7/openproject:18.0.0-fa.8-e56ccd23c5c")
+parser.add_argument("--image", default="ghcr.io/amirvaziry7/openproject:18.0.0-fa.17-a76b3e10c81")
 args = parser.parse_args()
 if not args.image or "\n" in args.image or "\r" in args.image:
     raise SystemExit("Invalid image reference")

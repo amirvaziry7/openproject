@@ -27,6 +27,50 @@
 
 $datepicker--selected-border-radius: 5px
 
+.flatpickr-calendar.op-persian-datepicker
+  width: max-content !important
+  > .flatpickr-months,
+  > .flatpickr-innerContainer
+    display: none !important
+
+  .op-persian-calendar
+    display: flex
+    width: max-content
+    font-family: Vazir, sans-serif
+
+    > section
+      flex: 0 0 min(280px, calc(100vw - 64px))
+      width: min(280px, calc(100vw - 64px))
+      min-width: 0
+      padding: 4px
+
+  .op-persian-calendar--header
+    display: flex
+    align-items: center
+    justify-content: space-between
+    min-height: 42px
+    font-weight: bold
+
+    button
+      background: transparent
+      color: inherit
+      border: 0
+      padding: 4px 12px
+      font-size: 22px
+      cursor: pointer
+
+  .op-persian-calendar--grid
+    display: grid
+    grid-template-columns: repeat(7, minmax(0, 1fr))
+
+    .flatpickr-day
+      width: 100%
+      max-width: none
+      margin: 0
+
+    .flatpickr-weekday
+      text-align: center
+
 @mixin disabled-day
   background: var(--body-background)
   color: var(--fgColor-muted)

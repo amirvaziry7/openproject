@@ -340,8 +340,8 @@ fa:
   permission_start_complete_sprint: شروع/تکمیل اسپرینت
   permission_view_sprints: مشاهده اسپرینت‌ها
   plugin_openproject_backlogs:
-    description: این ماژول قابلیت‌هایی را اضافه می‌کند که به تیم‌های Agile اجازه می‌دهد در پروژه‌های Scrum با OpenProject کار کنند.
-    name: بک‌لاگ‌های OpenProject
+    description: این ماژول قابلیت‌هایی را اضافه می‌کند که به تیم‌های Agile اجازه می‌دهد در پروژه‌های Scrum با سامانه جامع مدیریت پروژه کار کنند.
+    name: بک‌لاگ‌های سامانه جامع مدیریت پروژه
   project_module_backlogs: بک‌لاگ‌ها
   projects:
     copy:

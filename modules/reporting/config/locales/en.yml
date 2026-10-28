@@ -117,8 +117,8 @@ en:
   permission_save_cost_reports: "Save public cost reports"
   permission_save_private_cost_reports: "Save private cost reports"
   plugin_openproject_reporting:
-    description: "This plugin allows creating custom cost reports with filtering and grouping created by the OpenProject Time and costs plugin."
-    name: "OpenProject Reporting"
+    description: "This plugin allows creating custom cost reports with filtering and grouping created by the سامانه جامع مدیریت پروژه Time and costs plugin."
+    name: "سامانه جامع مدیریت پروژه Reporting"
 
   reporting:
     group_by:

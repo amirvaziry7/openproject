@@ -30,6 +30,7 @@ import { InputState, MultiInputState } from '@openproject/reactivestates';
 import { WorkPackageChangeset } from 'core-app/features/work-packages/components/wp-edit/work-package-changeset';
 import { WorkPackageResource } from 'core-app/features/hal/resources/work-package-resource';
 import { TimelineZoomLevel } from 'core-app/features/hal/resources/query-resource';
+import { persianPeriod } from 'core-app/core/datetime/persian-calendar';
 
 export const timelineElementCssClass = 'timeline-element';
 export const timelineBackgroundElementClass = 'timeline-element--bg';
@@ -144,13 +145,18 @@ export function getTimeSlicesForHeader(vp:TimelineViewParameters,
   const inViewport:[Moment, Moment][] = [];
   const rest:[Moment, Moment][] = [];
 
-  const time = startView.clone().startOf(unit);
-  const end = endView.clone().endOf(unit);
+  const solar = window.I18n?.locale === 'fa' && ['month', 'quarter', 'year'].includes(unit);
+  const period = (date:Moment) => solar
+    ? persianPeriod(date, unit as 'month'|'quarter'|'year')
+    : [date.clone().startOf(unit), date.clone().endOf(unit)];
+  let time = period(startView)[0];
+  const end = period(endView)[1];
 
   while (time.isBefore(end)) {
     const sliceStart = moment.max(time, startView).clone();
-    const sliceEnd = moment.min(time.clone().endOf(unit), endView).clone();
-    time.add(1, unit);
+    const periodEnd = period(time)[1];
+    const sliceEnd = moment.min(periodEnd, endView).clone();
+    time = periodEnd.clone().add(1, 'day').startOf('day');
 
     const viewport = vp.visibleViewportAtCalculationTime;
     if ((sliceStart.isSameOrAfter(viewport[0]) && sliceStart.isSameOrBefore(viewport[1]))

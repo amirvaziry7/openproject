@@ -108,8 +108,8 @@ RSpec.describe AdminUserSeeder do
       seeder.seed!
 
       admin = User.admin.last
-      expect(admin.firstname).to eq "OpenProject"
-      expect(admin.lastname).to eq "Admin"
+      expect(admin.firstname).to eq "مدیر"
+      expect(admin.lastname).to eq "سامانه جامع مدیریت پروژه"
       expect(admin.mail).to eq "foobar@example.com"
       expect(admin.force_password_change).to be false
       expect(admin.check_password?("admin")).to be false

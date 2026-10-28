@@ -40,6 +40,7 @@ import { PathHelperService } from 'core-app/core/path-helper/path-helper.service
 import { populateInputsFromDataset } from 'core-app/shared/components/dataset-inputs';
 import { fromEvent } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { observePersianDateInputs } from '../persian-date-input';
 
 export type DateMode = 'single'|'range';
 
@@ -87,6 +88,7 @@ export class OpWpDatePickerInstanceComponent extends UntilDestroyedMixin impleme
   private dueDateValue:Date|null;
   private minimalSchedulingDate:Date|null;
   private onFlatpickrSetValuesBound = this.onFlatpickrSetValues.bind(this);
+  private destroyLocalizedInputs:(() => void)|undefined;
 
   constructor() {
     super();
@@ -98,6 +100,10 @@ export class OpWpDatePickerInstanceComponent extends UntilDestroyedMixin impleme
 
   ngAfterViewInit():void {
     this.initializeDatepicker();
+    if (this.I18n.locale === 'fa') {
+      const frame = this.elementRef.nativeElement.closest('turbo-frame') ?? this.elementRef.nativeElement.closest('form');
+      if (frame) this.destroyLocalizedInputs = observePersianDateInputs(frame, [this.startDateFieldId, this.dueDateFieldId]);
+    }
 
     document.addEventListener('date-picker:flatpickr-set-values', this.onFlatpickrSetValuesBound);
   }
@@ -105,6 +111,8 @@ export class OpWpDatePickerInstanceComponent extends UntilDestroyedMixin impleme
   // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
   ngOnDestroy():void {
     super.ngOnDestroy();
+    this.destroyLocalizedInputs?.();
+    this.datePickerInstance?.destroy();
 
     document.removeEventListener('date-picker:flatpickr-set-values', this.onFlatpickrSetValuesBound);
   }

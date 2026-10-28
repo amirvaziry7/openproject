@@ -38,7 +38,7 @@ module Interceptors
 
     def default_headers
       {
-        "X-Mailer" => "OpenProject",
+        "X-Mailer" => Setting.software_name,
         "X-OpenProject-Host" => Setting.host_name,
         "X-OpenProject-Site" => Setting.app_title,
         "Precedence" => "bulk",

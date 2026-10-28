@@ -37,6 +37,42 @@ module OpenProject
     let(:format) { "%d/%m/%Y" }
     let(:user) { build_stubbed(:user) }
 
+    describe "Persian calendar presentation" do
+      around { |example| ::I18n.with_locale(:fa) { example.run } }
+
+      it "formats Persian month names and leap days without changing the source date" do
+        date = Date.new(2025, 3, 20)
+        expect(format_date(date, format: "%Y/%m/%d")).to eq "1403/12/30"
+        expect(format_date(date, format: "%d %B %Y")).to eq "30 اسفند 1403"
+        expect(date.iso8601).to eq "2025-03-20"
+      end
+
+      it "formats Persian days which would be invalid in a Gregorian month" do
+        expect(format_date(Date.new(2026, 5, 21), format: "%Y/%m/%d")).to eq "1405/02/31"
+      end
+
+      it "applies the display time zone before converting the calendar" do
+        time = Time.utc(2025, 3, 20, 21)
+        expect(format_date(time, time_zone: "Asia/Tehran", format: "%Y/%m/%d")).to eq "1404/01/01"
+        expect(format_date(time, time_zone: "UTC", format: "%Y/%m/%d")).to eq "1403/12/30"
+      end
+
+      it "retains Gregorian machine values when explicitly requested" do
+        expect(format_date(Date.new(2025, 3, 21), format: "%Y-%m-%d", calendar: false)).to eq "2025-03-21"
+      end
+
+      it "keeps range datetime attributes Gregorian" do
+        rendered = format_date_range([Date.new(2025, 3, 20), Date.new(2025, 3, 21)])
+        expect(rendered).to include('datetime="2025-03-20"', 'datetime="2025-03-21"', "1403", "1404")
+      end
+
+      it "returns to the Gregorian calendar in English" do
+        ::I18n.with_locale(:en) do
+          expect(format_date(Date.new(2026, 10, 27), format: "%Y/%m/%d")).to eq "2026/10/27"
+        end
+      end
+    end
+
     describe "#format_date with time" do
       current_user { build_stubbed(:user, preferences: { time_zone: user_time_zone }) }
 

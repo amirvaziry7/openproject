@@ -147,7 +147,7 @@ fa:
   oauth:
     scopes:
       bcf_v2_1: دسترسی کامل به API نسخه2.1
-      bcf_v2_1_text: برنامه دسترسی کامل خواندن و نوشتن به OpenProject BCF API نسخه2.1 را برای انجام اقدامات از طرف شما دریافت خواهد کرد.
+      bcf_v2_1_text: برنامه دسترسی کامل خواندن و نوشتن به سامانه جامع مدیریت پروژه BCF API نسخه2.1 را برای انجام اقدامات از طرف شما دریافت خواهد کرد.
   permission_delete_bcf: مشکلات حذف BCF
   permission_manage_bcf: وارد کردن و مدیریت مشکلات BCF
   permission_manage_bcf_explanation: |
@@ -157,8 +157,8 @@ fa:
   permission_view_ifc_models: مشاهده مدل هایIFC
   permission_view_linked_issues: مشاهده مشکلات BCF
   plugin_openproject_bim:
-    description: این افزونه OpenProject قابلیت‌های BIM و BCF را اضافه می‌کند.
-    name: قابلیت‌های BIM و BCF در OpenProject
+    description: این افزونه سامانه جامع مدیریت پروژه قابلیت‌های BIM و BCF را اضافه می‌کند.
+    name: قابلیت‌های BIM و BCF در سامانه جامع مدیریت پروژه
   project_module_bcf: BCF
   project_module_bim: BCF
   project_module_ifc_models: مدل های IFC

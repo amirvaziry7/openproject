@@ -27,6 +27,7 @@
 
 import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, Injector, Input, OnInit, Output, ViewChild, ViewEncapsulation, inject } from '@angular/core';
 import { I18nService } from 'core-app/core/i18n/i18n.service';
+import { parsePersianDate } from 'core-app/core/datetime/persian-calendar';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { onDayCreate, parseDate, setDates } from 'core-app/shared/components/datepicker/helpers/date-modal.helpers';
 import { TimezoneService } from 'core-app/core/datetime/timezone.service';
@@ -119,6 +120,22 @@ export class OpModalSingleDatePickerComponent implements ControlValueAccessor, O
   @ViewChild('flatpickrTarget') flatpickrTarget:ElementRef<HTMLElement>;
 
   public workingValue = '';
+  public invalidDateInput = false;
+
+  public displayDate(value:string):string {
+    return value && this.I18n.locale === 'fa' ? this.timezoneService.formattedDate(value, 'YYYY/MM/DD') : value;
+  }
+
+  public changeWorkingInput(value:string):void {
+    const iso = this.I18n.locale === 'fa' && value ? parsePersianDate(value, 'YYYY/MM/DD')?.date : value;
+    this.invalidDateInput = iso === undefined;
+    if (!this.invalidDateInput) this.writeWorkingValue(iso ?? '');
+  }
+
+  public changeDisplayedInput(value:string):void {
+    const iso = this.I18n.locale === 'fa' && value ? parsePersianDate(value, 'YYYY/MM/DD')?.date : value;
+    if (iso !== undefined) this.changeValueFromInputDebounced(iso);
+  }
 
   public workingDate:Date|null = null;
 
@@ -155,6 +172,7 @@ export class OpModalSingleDatePickerComponent implements ControlValueAccessor, O
   }
 
   save($event:Event) {
+    if (this.invalidDateInput) { $event.preventDefault(); return; }
     const form = $event.target as HTMLFormElement;
 
     if (form.reportValidity()) {
@@ -253,6 +271,7 @@ export class OpModalSingleDatePickerComponent implements ControlValueAccessor, O
   }
 
   writeWorkingValue(value:string):void {
+    this.invalidDateInput = false;
     const date = new Date(value);
     // since new Date() returns a date in our local timezone, we need to find the UTC date
     const utcDate = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds(), date.getUTCMilliseconds());

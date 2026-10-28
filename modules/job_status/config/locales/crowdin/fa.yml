@@ -23,4 +23,4 @@ fa:
   label_job_status_plural: وضعیت کارهای پس‌زمینه
   plugin_openproject_job_status:
     description: فهرست و وضعیت کارهای پس‌زمینه.
-    name: وضعیت کارهای OpenProject
+    name: وضعیت کارهای سامانه جامع مدیریت پروژه

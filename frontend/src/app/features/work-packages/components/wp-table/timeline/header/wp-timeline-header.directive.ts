@@ -28,6 +28,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, OnInit, inject } from '@angular/core';
 import { WorkPackageTimelineTableController } from 'core-app/features/work-packages/components/wp-table/timeline/container/wp-timeline-container.directive';
 import moment, { Moment } from 'moment';
+import { formatCalendarDate } from 'core-app/core/datetime/persian-calendar';
 import { I18nService } from 'core-app/core/i18n/i18n.service';
 import { WorkPackageViewTimelineService } from 'core-app/features/work-packages/routing/wp-view-base/view-services/wp-view-timeline.service';
 import { TimelineZoomLevel } from 'core-app/features/hal/resources/query-resource';
@@ -105,61 +106,61 @@ export class WorkPackageTimelineHeaderController implements OnInit {
 
   private renderLabelsDays(vp:TimelineViewParameters) {
     this.renderTimeSlices(vp, 'month', 0, vp.dateDisplayStart, vp.dateDisplayEnd, (start, cell) => {
-      cell.innerHTML = start.format('MMM YYYY');
+      cell.innerHTML = formatCalendarDate(start, 'MMM YYYY', this.I18n.locale);
       cell.classList.add('wp-timeline--header-top-bold-element');
       cell.style.height = '13px';
     });
 
     this.renderTimeSlices(vp, 'week', 13, vp.dateDisplayStart, vp.dateDisplayEnd, (start, cell) => {
-      cell.innerHTML = start.format('ww');
+      cell.innerHTML = formatCalendarDate(start, 'ww', this.I18n.locale);
       cell.classList.add('-top-border');
       cell.style.height = '32px';
     });
 
     this.renderTimeSlices(vp, 'day', 23, vp.dateDisplayStart, vp.dateDisplayEnd, (start, cell) => {
-      cell.innerHTML = start.format('D');
+      cell.innerHTML = formatCalendarDate(start, 'D', this.I18n.locale);
       cell.classList.add('-top-border');
       cell.style.height = '22px';
     });
 
     this.renderTimeSlices(vp, 'day', 33, vp.dateDisplayStart, vp.dateDisplayEnd, (start, cell) => {
-      cell.innerHTML = start.format('dd');
+      cell.innerHTML = formatCalendarDate(start, 'dd', this.I18n.locale);
       cell.classList.add('wp-timeline--header-day-element');
     });
   }
 
   private renderLabelsWeeks(vp:TimelineViewParameters) {
     this.renderTimeSlices(vp, 'month', 0, vp.dateDisplayStart, vp.dateDisplayEnd, (start, cell) => {
-      cell.innerHTML = start.format('MMM YYYY');
+      cell.innerHTML = formatCalendarDate(start, 'MMM YYYY', this.I18n.locale);
       cell.classList.add('wp-timeline--header-top-bold-element');
     });
 
     this.renderTimeSlices(vp, 'week', 15, vp.dateDisplayStart, vp.dateDisplayEnd, (start, cell) => {
-      cell.innerHTML = start.format('ww');
+      cell.innerHTML = formatCalendarDate(start, 'ww', this.I18n.locale);
       cell.classList.add('-top-border');
       cell.style.height = '22px';
     });
 
     this.renderTimeSlices(vp, 'day', 25, vp.dateDisplayStart, vp.dateDisplayEnd, (start, cell) => {
-      cell.innerHTML = start.format('D');
+      cell.innerHTML = formatCalendarDate(start, 'D', this.I18n.locale);
       cell.classList.add('wp-timeline--header-middle-element');
     });
   }
 
   private renderLabelsMonths(vp:TimelineViewParameters) {
     this.renderTimeSlices(vp, 'year', 0, vp.dateDisplayStart, vp.dateDisplayEnd, (start, cell) => {
-      cell.innerHTML = start.format('YYYY');
+      cell.innerHTML = formatCalendarDate(start, 'YYYY', this.I18n.locale);
       cell.classList.add('wp-timeline--header-top-bold-element');
     });
 
     this.renderTimeSlices(vp, 'month', 15, vp.dateDisplayStart, vp.dateDisplayEnd, (start, cell) => {
-      cell.innerHTML = start.format('MMM');
+      cell.innerHTML = formatCalendarDate(start, 'MMM', this.I18n.locale);
       cell.classList.add('-top-border');
       cell.style.height = '30px';
     });
 
     this.renderTimeSlices(vp, 'week', 25, vp.dateDisplayStart, vp.dateDisplayEnd, (start, cell) => {
-      cell.innerHTML = start.format('ww');
+      cell.innerHTML = formatCalendarDate(start, 'ww', this.I18n.locale);
       cell.classList.add('wp-timeline--header-middle-element');
     });
   }
@@ -167,37 +168,37 @@ export class WorkPackageTimelineHeaderController implements OnInit {
   private renderLabelsQuarters(vp:TimelineViewParameters) {
     this.renderTimeSlices(vp, 'year', 0, vp.dateDisplayStart, vp.dateDisplayEnd, (start, cell) => {
       cell.classList.add('wp-timeline--header-top-bold-element');
-      cell.innerHTML = start.format('YYYY');
+      cell.innerHTML = formatCalendarDate(start, 'YYYY', this.I18n.locale);
     });
 
     this.renderTimeSlices(vp, 'quarter', 15, vp.dateDisplayStart, vp.dateDisplayEnd, (start, cell) => {
       cell.innerHTML = this.I18n.t('js.gantt_chart.quarter_label',
-        { quarter_number: start.format('Q') });
+        { quarter_number: formatCalendarDate(start, 'Q', this.I18n.locale) });
       cell.classList.add('-top-border');
       cell.style.height = '30px';
     });
 
     this.renderTimeSlices(vp, 'month', 25, vp.dateDisplayStart, vp.dateDisplayEnd, (start, cell) => {
-      cell.innerHTML = start.format('MMM');
+      cell.innerHTML = formatCalendarDate(start, 'MMM', this.I18n.locale);
       cell.classList.add('wp-timeline--header-middle-element');
     });
   }
 
   private renderLabelsYears(vp:TimelineViewParameters) {
     this.renderTimeSlices(vp, 'year', 0, vp.dateDisplayStart, vp.dateDisplayEnd, (start, cell) => {
-      cell.innerHTML = start.format('YYYY');
+      cell.innerHTML = formatCalendarDate(start, 'YYYY', this.I18n.locale);
       cell.classList.add('wp-timeline--header-top-bold-element');
     });
 
     this.renderTimeSlices(vp, 'quarter', 15, vp.dateDisplayStart, vp.dateDisplayEnd, (start, cell) => {
       cell.innerHTML = this.I18n.t('js.gantt_chart.quarter_label',
-        { quarter_number: start.format('Q') });
+        { quarter_number: formatCalendarDate(start, 'Q', this.I18n.locale) });
       cell.classList.add('-top-border');
       cell.style.height = '30px';
     });
 
     this.renderTimeSlices(vp, 'month', 25, vp.dateDisplayStart, vp.dateDisplayEnd, (start, cell) => {
-      cell.innerHTML = start.format('M');
+      cell.innerHTML = formatCalendarDate(start, 'M', this.I18n.locale);
       cell.classList.add('wp-timeline--header-middle-element');
     });
   }

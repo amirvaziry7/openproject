@@ -328,7 +328,7 @@ projects:
           options:
             t_name: "Getting started"
             t_text: |
-              We are glad you joined! We suggest to try a few things to get started in OpenProject.
+              We are glad you joined! We suggest to try a few things to get started in سامانه جامع مدیریت پروژه.
 
               Discover the most important features with our [Guided Tour]({{opSetting:base_url}}/projects/demo-project/work_packages/?start_onboarding_tour=true).
 
@@ -699,7 +699,7 @@ projects:
           options:
             t_name: "Getting started"
             t_text: |
-              We are glad you joined! We suggest to try a few things to get started in OpenProject.
+              We are glad you joined! We suggest to try a few things to get started in سامانه جامع مدیریت پروژه.
 
               _Try the following steps:_
 
@@ -1246,9 +1246,9 @@ workflows:
       - :default_status_closed
 
 welcome:
-  t_title: "Welcome to OpenProject!"
+  t_title: "Welcome to سامانه جامع مدیریت پروژه!"
   t_text: |
-    OpenProject is the leading open source project management software. It supports classic, agile as well as hybrid project management and gives you full control over your data.
+    سامانه جامع مدیریت پروژه is the leading open source project management software. It supports classic, agile as well as hybrid project management and gives you full control over your data.
 
     Core features and use cases:
 

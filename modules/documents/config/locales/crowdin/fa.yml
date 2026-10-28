@@ -160,6 +160,6 @@ fa:
   permission_manage_documents: مدیریت اسناد
   permission_view_documents: دیدن اسناد
   plugin_openproject_documents:
-    description: افزونه‌ای برای OpenProject که امکان ایجاد اسناد در پروژه‌ها را فراهم می‌کند.
-    name: اسناد OpenProject
+    description: افزونه‌ای برای سامانه جامع مدیریت پروژه که امکان ایجاد اسناد در پروژه‌ها را فراهم می‌کند.
+    name: اسناد سامانه جامع مدیریت پروژه
   project_module_documents: اسناد
