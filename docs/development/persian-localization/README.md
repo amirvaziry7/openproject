@@ -145,9 +145,11 @@ and bold weights. The application and Primer font variables switch on
 original SIL Open Font License are in `frontend/src/assets/fonts/vazir/`.
 
 The institutional logo is stored in `app/assets/images/university_logo.png`.
-The supplied 1060 × 1500 PNG is preserved unchanged in the desktop/theme,
+The transparent 1054 × 1492 RGBA PNG is shared by the desktop/theme,
 touch-icon, PDF-export, style-guide and BIM default logo assets. The mobile and
-favicon SVG assets embed the same PNG without redrawing or changing its text.
+favicon SVG assets and standalone error page embed the same transparent PNG.
+The white backing was removed with the built-in image tool; the original file
+was retained separately. See [the extraction record and exact prompt](transparent-logo.md).
 The login page displays the full portrait logo at 180px high with its original
 proportions; the header scales it to fit its existing logo area.
 

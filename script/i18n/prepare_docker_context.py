@@ -11,6 +11,7 @@ import tarfile
 
 
 EXTRA_PATHS = [
+    "docs/development/persian-localization/transparent-logo.md",
     "frontend/src/app/core/datetime/calendar-presentation.spec.ts",
     "frontend/src/app/core/datetime/calendar-presentation.ts",
     "lib/open_project/internationalization/persian_calendar.rb",
@@ -108,7 +109,7 @@ def main():
     parser.add_argument("--refresh", action="store_true", help="Update the snapshot from changed tracked files and the explicit extras")
     parser.add_argument("--target", default="slim")
     parser.add_argument("--dockerfile", default="docker/prod/Dockerfile")
-    parser.add_argument("--tag", default="ghcr.io/amirvaziry7/openproject:18.0.0-fa.17-a76b3e10c81")
+    parser.add_argument("--tag", default="ghcr.io/amirvaziry7/openproject:18.0.0-fa.18-ef70aff4adc")
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[2]
     output = root / "tmp" / "persian-build"

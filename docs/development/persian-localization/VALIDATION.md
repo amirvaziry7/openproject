@@ -1,5 +1,42 @@
 # Persian localization validation — 2026-10-14
 
+## Transparent institutional logo — 2026-10-28
+
+Candidate: `ghcr.io/amirvaziry7/openproject:18.0.0-fa.18-ef70aff4adc`.
+Image ID:
+`sha256:f602eeb0038865119ad0b8c213be4db41fd9e6e051c18df3a432d04319d62bc2`.
+Source manifest SHA256:
+`c725733acf4ce261401f97c2c094eede3ad7ced24a466d65862c92ee7ffcda35`.
+
+The built-in image tool removed the white background from the institutional
+logo. The selected PNG is RGBA, 1054 × 1492, with genuine transparency in both
+outer margins and internal negative spaces. The original uploaded file was
+not overwritten. See [the extraction record and exact prompt](transparent-logo.md).
+
+Executed validation:
+
+- All ten PNG aliases have identical output bytes, alpha extrema 0–255, and
+  zero-alpha corner pixels. All four SVG wrappers and the standalone error
+  page embed the same transparent PNG. SVG XML and native dimensions passed.
+- Prawn successfully embedded the transparent image into a PDF with an alpha
+  soft mask (`/SMask`). Local evidence:
+  `tmp/transparent-logo-checks/university-logo-transparent.pdf`.
+- Five browser scenarios passed on the built image: desktop login/header/icon,
+  English login, standalone error page, mobile login/menu, and authenticated
+  projects/work packages/administration. Browser checks decoded the served PNG
+  pixels, including SVG-embedded payloads, and verified zero alpha in the
+  background and visible blue artwork. They also matched served image hashes
+  against the project master PNG.
+- The full production build passed and the local web container is healthy.
+  Only web and worker containers were recreated; existing staging database and
+  volumes were retained. No seeder or database migrations ran.
+
+Browser evidence is in ignored
+`tmp/persian-validation/transparent-logo-brand-results.json` and the
+`transparent-logo-*.png` screenshots. This asset-only update did not rerun the
+full Rails or frontend test suites. No production deployment, image publication
+or Git push was performed for this change.
+
 ## Pre-commit review — 2026-10-28
 
 The combined institutional branding/footer and Persian calendar changes were
